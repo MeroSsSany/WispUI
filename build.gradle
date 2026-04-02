@@ -4,10 +4,21 @@ plugins {
 }
 
 group = 'org.infinitytwogames'
-version = '1.0-SNAPSHOT'
+version = '1.0'
 
 repositories {
     mavenCentral()
+
+    maven {
+        url = uri('https://mcef-download.cinemamod.com/repositories/releases')
+    }
+    // Optional for snapshot versions
+    maven {
+        url = uri('https://mcef-download.cinemamod.com/repositories/snapshots')
+    }
+
+    maven { url 'https://jitpack.io' }
+    maven { url 'https://maven.cinemamod.com/repository/maven-public/' }
 }
 
 project.ext.lwjglNatives = {

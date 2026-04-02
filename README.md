@@ -1,7 +1,7 @@
 ## WispUI
 
 **WispUI** is a lightweight, high-performance UI library designed for LWJGL-based voxel engines and games. 
-Built by [Infinity Two Games](https://github.com/infinitytwogames),
+Built by [MeroSsSany](https://github.com/MeroSsSany),
 it focuses on minimal overhead, off-heap memory management.
 
 ---
@@ -127,6 +127,7 @@ This ensures that the software remains free and open-source. Anyone who modifies
 or distributes this code must also share their source code under the same or open-source license.
 
 **Trademark Notice:**
-The names **WispUI**, **Infinity Two Games**, and all associated logos are trademarks of Infinity Two Games.
+The name **WispUI**, and all associated logos are trademarks of MeroSsSany.
 While the source code is open-source, this license does not grant you permission to use our brand names or logos 
 for your own distributions or commercial products without express written consent.
+
