@@ -70,7 +70,7 @@ public class TextureAtlas {
         }
     }
 
-    public Texture build() {
+    public Texture build(boolean useAntiAlias) {
         atlasWidth = imageWidth * columns;
         atlasHeight = imageHeight * rows;
 
@@ -132,7 +132,7 @@ public class TextureAtlas {
             throw new RuntimeException(e);
         }
 
-        plain = new Texture(atlas, true);
+        plain = new Texture(atlas, useAntiAlias);
         return plain;
     }
 
