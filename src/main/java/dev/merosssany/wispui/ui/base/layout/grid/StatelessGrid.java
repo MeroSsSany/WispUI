@@ -28,8 +28,6 @@ import java.util.Set;
  * The pixel position is then derived by multiplying these coordinates by the
  * {@code cellSize} plus the {@code space} (gutter).
  * </p>
- *
- * @author InfinityTwo Games
  */
 public class StatelessGrid {
     protected Map<UI, Vector2i> uis = new LinkedHashMap<>(); // UI mapped to Grid Coordinates (Col, Row)

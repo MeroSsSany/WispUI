@@ -39,8 +39,6 @@ import static dev.merosssany.wispui.manager.SceneManager.propagateMouseClick;
  * <li><b>Proportional Scrollbar:</b> Calculates the height of the scroll handle
  * based on the ratio of viewport height to total content height.</li>
  * </ul>
- *
- * @author InfinityTwo Games
  */
 public class ScrollableMenu extends UI implements Container {
     protected List<UI> uis = new ArrayList<>();

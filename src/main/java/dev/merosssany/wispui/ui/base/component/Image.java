@@ -26,8 +26,6 @@ import dev.merosssany.wispui.ui.base.UI;
  * <li><b>Lifecycle Management:</b> Automatically calls {@code texture.cleanup()}
  * to free GPU memory when the UI component is closed.</li>
  * </ul>
- *
- * @author Infinity Two Games
  */
 public class Image extends UI implements Component {
     protected Texture texture;

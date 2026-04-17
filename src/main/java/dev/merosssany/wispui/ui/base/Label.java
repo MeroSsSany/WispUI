@@ -20,7 +20,7 @@ import org.joml.Vector2i;
  * adding high-level logic to handle text that exceeds the allowed {@code width}.
  * </p>
  *
- * <h2>Truncation & Clipping</h2>
+ * <h2>Truncation And Clipping</h2>
  * <p>
  * This class provides several methods to handle overflow:
  * <ul>
@@ -30,8 +30,6 @@ import org.joml.Vector2i;
  * a specific index (the caret) is always visible within the bounds.</li>
  * </ul>
  * </p>
- *
- * @author Infinity Two Games
  */
 public class Label extends UI {
     protected FontRenderer textRenderer;

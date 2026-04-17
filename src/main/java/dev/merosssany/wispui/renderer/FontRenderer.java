@@ -42,8 +42,6 @@ import static org.lwjgl.stb.STBTruetype.stbtt_GetBakedQuad;
  * <li><b>Standalone Rendering:</b> {@link #renderText(Matrix4f, String, float, float, int, float, float, float, float, float)}
  * uses its own internal shader and VBO for specialized text effects or isolated rendering.</li>
  * </ul>
- *
- * @author Infinity Two Games
  */
 public class FontRenderer {
     private static final int BITMAP_W   = 1024;

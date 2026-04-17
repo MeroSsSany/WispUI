@@ -1,8 +1,6 @@
 package dev.merosssany.wispui.ui.base.layout;
 
-import dev.merosssany.wispui.Display;
 import dev.merosssany.wispui.Window;
-import dev.merosssany.wispui.data.Constants;
 import dev.merosssany.wispui.event.SubscribeEvent;
 import dev.merosssany.wispui.event.bus.EventBus;
 import dev.merosssany.wispui.event.input.keyboard.KeyPressEvent;
@@ -10,7 +8,6 @@ import dev.merosssany.wispui.event.input.mouse.MouseButtonEvent;
 import dev.merosssany.wispui.event.input.mouse.MouseHoverEvent;
 import dev.merosssany.wispui.manager.Mouse;
 import dev.merosssany.wispui.renderer.UIRenderer;
-import dev.merosssany.wispui.ui.base.Label;
 import dev.merosssany.wispui.ui.base.UI;
 import dev.merosssany.wispui.ui.base.animations.Updatable;
 import org.joml.Vector2f;
@@ -32,12 +29,10 @@ import static dev.merosssany.wispui.VectorMath.isPointWithinRectangle;
  * <ul>
  * <li><b>Input Dispatching:</b> Routes mouse and keyboard events to the correct {@link UI} components.</li>
  * <li><b>Z-Order Management:</b> Maintains a sorted list of components based on their draw order.</li>
- * <li><b>Hover & Tooltips:</b> Tracks how long a mouse has hovered over an element to trigger tooltips.</li>
+ * <li><b>Hover And Tooltips:</b> Tracks how long a mouse has hovered over an element to trigger tooltips.</li>
  * <li><b>Task Scheduling:</b> Executes thread-safe {@link Runnable} tasks via a concurrent queue.</li>
  * </ul>
  * </p>
- *
- * @author Infinity Two Games
  */
 public class Scene {
     protected final UIRenderer renderer;
@@ -47,7 +42,6 @@ public class Scene {
     protected boolean handleInput = true;
     protected String activeTooltip = null;
     protected final ConcurrentLinkedQueue<Runnable> runs = new ConcurrentLinkedQueue<>();
-    protected final Label tooltip;
     
     private final Vector2i lastMousePosition = new Vector2i();
     private final Vector2i mouseTemp = new Vector2i();
@@ -59,12 +53,6 @@ public class Scene {
         this.renderer = renderer;
         this.window = window;
         this.uis = Collections.synchronizedList(new ArrayList<>());
-        
-        tooltip = new Label(this, Constants.fontFilePath);
-        tooltip.setSize(512, 64);
-        tooltip.setBackgroundColor(0.05f, 0.05f, 0.05f, 0.75f);
-        tooltip.setTextPosition(new Anchor(0, 0.5f), new Pivot(0, 0.5f));
-        tooltip.setDrawOrder(100);
         
         EventBus.connect(this);
     }
@@ -107,26 +95,12 @@ public class Scene {
         renderer.begin();
         drawUIs();
         
-        if (activeTooltip != null) {
-            drawTooltip(activeTooltip);
-        }
-        
         renderer.flush();
         
         Runnable r;
         while ((r = runs.poll()) != null) {
             r.run();
         }
-    }
-    
-    private void drawTooltip(String activeTooltip) {
-        tooltipShown = true;
-        tooltip.setText(activeTooltip);
-        tooltip.draw();
-    }
-    
-    public String getActiveTooltip() {
-        return activeTooltip;
     }
     
     public void setActiveTooltip(String activeTooltip) {
@@ -191,25 +165,6 @@ public class Scene {
                     Mouse.setCursor(ui.getCursorType());
                 }
                 
-                if (mousePosition.equals(lastMousePosition)) {
-                    hoverTime += delta;
-                } else {
-                    hoverTime = 0;
-                }
-                
-                if (hoverTime >= 1.0f && ui.getTip() != null) {
-                    activeTooltip = ui.getTip();
-                    
-                    int virtualWidth = Display.getWidth();
-                    int xOffset = 12;
-                    
-                    if (mousePosition.x + tooltip.getWidth() + xOffset > virtualWidth) {
-                        tooltip.setOffset(mousePosition.x - tooltip.getWidth() - xOffset, mousePosition.y + 8);
-                    } else {
-                        tooltip.setOffset(mousePosition.x + xOffset, mousePosition.y + 8);
-                    }
-                }
-                
                 hoverHandled = true;
             } else {
                 if (ui.isHovering()) {
@@ -230,10 +185,6 @@ public class Scene {
     
     public void addHoverTime(float delta) {
         hoverTime += delta;
-    }
-    
-    public Label getTooltip() {
-        return tooltip;
     }
     
     protected void drawUIs() {
@@ -312,7 +263,6 @@ public class Scene {
             ui.close();
         }
         uis.clear();
-        tooltip.close();
         
         setHandleInput(false);
     }

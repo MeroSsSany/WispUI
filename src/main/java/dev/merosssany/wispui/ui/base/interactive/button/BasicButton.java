@@ -26,8 +26,6 @@ import static org.lwjgl.glfw.GLFW.GLFW_RELEASE;
  * <li><b>Visual Dimming:</b> Uses a direct color subtraction logic to darken
  * the background upon hover, providing immediate user feedback.</li>
  * </ul>
- *
- * @author Infinity Two Games
  */
 public abstract class BasicButton extends UI {
     protected RGBA original = backgroundColor.copy();

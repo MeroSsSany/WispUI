@@ -28,8 +28,6 @@ import java.util.*;
  * <li><b>Content Area:</b> A collection of {@link ScrollableMenu}s offset to the right
  * of the sidebar, filling the remaining window space.</li>
  * </ul>
- *
- * @author Infinity Two Games
  */
 public class VerticalTabMenu extends UI implements Container {
     protected Map<String, Tab> buttons = new HashMap<>();
@@ -174,6 +172,11 @@ public class VerticalTabMenu extends UI implements Container {
         temp.addAll(screen.get(current).getUIs());
         temp.add(tabSidebar);
         return temp;
+    }
+    
+    @Override
+    public void addUI(UI ui) {
+        put(ui, current);
     }
     
     protected static class Tab extends ToggleButton {

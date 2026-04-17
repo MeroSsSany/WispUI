@@ -27,7 +27,6 @@ import java.util.List;
  * </ol>
  * </p>
  *
- * @author Infinity Two Games
  * @deprecated Under active development.
  */
 @Deprecated

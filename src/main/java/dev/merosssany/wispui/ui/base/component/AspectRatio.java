@@ -26,8 +26,6 @@ import org.joml.Vector2i;
  * <li><b>Automatic Centering:</b> Calculates an {@code offset} vector to keep
  * the UI perfectly centered in the window.</li>
  * </ul>
- *
- * @author InfinityTwo Games
  */
 public class AspectRatio implements Component {
     protected int width;

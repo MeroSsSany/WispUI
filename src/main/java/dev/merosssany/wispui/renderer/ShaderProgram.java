@@ -29,8 +29,6 @@ import static org.lwjgl.opengl.GL31.GL_INVALID_INDEX;
  * <li><b>Uniform Management:</b> Provides an API to update constants in the shader,
  * such as Projection Matrices, Textures, and Colors.</li>
  * </ul>
- *
- * @author Infinity Two Games
  */
 public class ShaderProgram {
     private final int programId;

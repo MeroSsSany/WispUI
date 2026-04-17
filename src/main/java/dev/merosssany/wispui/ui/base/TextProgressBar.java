@@ -23,8 +23,6 @@ import java.util.concurrent.atomic.AtomicLong;
  * This allows background threads (e.g., file loaders) to safely update progress
  * without blocking the main render thread.
  * </p>
- *
- * @author Infinity Two Games
  */
 public class TextProgressBar extends Label implements Updatable {
     protected Rectangle bar;

@@ -56,7 +56,7 @@ import static org.lwjgl.system.MemoryUtil.memFree;
  * <li>Once cleaned up, this buffer is invalid and must not be reused.</li>
  * </ul>
  *
- * @author MeroSsSany/Infinity Two Games
+ * @author MeroSsSany
  * @version 1.0
  * @see java.nio.FloatBuffer
  */

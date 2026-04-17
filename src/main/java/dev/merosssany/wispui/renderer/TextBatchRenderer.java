@@ -1,5 +1,6 @@
 package dev.merosssany.wispui.renderer;
 
+import dev.merosssany.wispui.Display;
 import dev.merosssany.wispui.data.RGB;
 import dev.merosssany.wispui.event.SubscribeEvent;
 import dev.merosssany.wispui.event.bus.EventBus;
@@ -12,7 +13,6 @@ import org.lwjgl.system.MemoryStack;
 
 import java.nio.FloatBuffer;
 
-import static dev.merosssany.wispui.data.Constants.UI_DESIGN_HEIGHT;
 import static org.lwjgl.opengl.GL15.*;
 import static org.lwjgl.opengl.GL20.*;
 import static org.lwjgl.opengl.GL20C.glVertexAttribPointer;
@@ -116,12 +116,12 @@ public class TextBatchRenderer {
         float currentWindowWidth = e.width;
         float currentWindowHeight = e.height;
 
-        float currentVirtualWidth = (currentWindowWidth / currentWindowHeight) * UI_DESIGN_HEIGHT;
+        float currentVirtualWidth = (currentWindowWidth / currentWindowHeight) * Display.height;
 //        System.out.println(currentVirtualWidth);
         proj.setOrtho(
                 0.0f,               // Left
                 currentVirtualWidth, // Right
-                UI_DESIGN_HEIGHT,   // Bottom (max Y)
+                Display.height,   // Bottom (max Y)
                 0.0f,               // Top (min Y)
                 -1.0f,              // Near
                 1.0f                // Far

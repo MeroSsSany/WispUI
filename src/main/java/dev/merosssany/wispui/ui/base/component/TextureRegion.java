@@ -26,8 +26,6 @@ import dev.merosssany.wispui.ui.base.UIBuilder;
  * <li><b>Component Pattern:</b> Implements {@code copy()} for easy duplication
  * within complex UI hierarchies or template systems.</li>
  * </ul>
- *
- * @author Infinity Two Games
  */
 public class TextureRegion extends UI implements Component {
     protected int textureIndex;

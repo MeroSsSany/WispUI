@@ -36,8 +36,6 @@ import static org.lwjgl.glfw.GLFW.*;
  * <li><b>Value Mapping:</b> Multiplies the percentage by the {@code max} integer to determine the current value.</li>
  * <li><b>Direct Jump:</b> Clicking anywhere on the track (via {@code onMouseClicked}) instantly snaps the handle to that value.</li>
  * </ul>
- *
- * @author Infinity Two Games
  */
 public abstract class SliderBar extends UI implements Container {
     protected BasicButton button;

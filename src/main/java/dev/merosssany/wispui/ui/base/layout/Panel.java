@@ -14,14 +14,12 @@ import java.util.List;
  * creation of complex UI hierarchies where children are positioned relative
  * to the panel's own coordinates.
  * </p>
- * * <h2>Hierarchy & Rendering</h2>
+ * * <h2>Hierarchy And Rendering</h2>
  * <p>
  * When a Panel is drawn, it first renders its own background (via {@code super.draw()})
  * and then iterates through its children to render them. Note that children
  * are rendered in the order they were added unless specific draw orders are set.
  * </p>
- *
- * @author Infinity Two Games
  */
 public class Panel extends UI implements Container {
     private final List<UI> children = new ArrayList<>();

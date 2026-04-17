@@ -35,8 +35,6 @@ import static org.lwjgl.glfw.GLFW.*;
  * This percentage is then applied to the menu's total scrollable range
  * (contentHeight - viewportHeight).
  * </p>
- *
- * @author InfinityTwo Games
  */
 public class ScrollButton extends UI { // The Scroll Handle/Thumb
     protected final ScrollableMenu menu;

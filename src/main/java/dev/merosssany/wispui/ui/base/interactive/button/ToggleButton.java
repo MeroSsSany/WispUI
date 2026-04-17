@@ -26,8 +26,6 @@ import static org.lwjgl.glfw.GLFW.GLFW_RELEASE;
  * <li><b>Hovered:</b> Darkened by an additional 0.15 to show interactivity.</li>
  * </ul>
  * </p>
- *
- * @author Infinity Two Games
  */
 public abstract class ToggleButton extends Button {
     protected boolean toggle;

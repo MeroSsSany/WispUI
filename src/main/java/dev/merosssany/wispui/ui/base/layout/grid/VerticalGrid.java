@@ -26,8 +26,6 @@ import static java.lang.Math.max;
  * <li><b>Dynamic Resizing:</b> Updates its total height after every layout
  * change, ensuring compatibility with {@link ScrollableMenu}.</li>
  * </ul>
- *
- * @author Infinity Two Games
  */
 public class VerticalGrid extends Grid {
     protected int current;

@@ -6,6 +6,7 @@ import dev.merosssany.wispui.event.input.mouse.MouseHoverEvent;
 import dev.merosssany.wispui.manager.SceneManager;
 import dev.merosssany.wispui.ui.base.UI;
 import dev.merosssany.wispui.ui.base.interactive.button.ToggleButton;
+import dev.merosssany.wispui.ui.base.layout.Container;
 import dev.merosssany.wispui.ui.base.layout.Scene;
 import dev.merosssany.wispui.ui.base.layout.grid.Grid;
 import dev.merosssany.wispui.ui.base.layout.menu.scroll.HorizontalScrollableMenu;
@@ -20,7 +21,7 @@ import java.util.UUID;
  * <p>
  * This component consists of a horizontal row of toggleable buttons at the top
  * and a dynamic content area below. It is ideal for main menu categories or
- * multi-page settings panels.
+ * multipage settings panels.
  * </p>
  * *
  *
@@ -28,15 +29,13 @@ import java.util.UUID;
  * <ul>
  * <li><b>Tab Bar:</b> A {@link HorizontalScrollableMenu} containing a 1-row {@link Grid}.
  * This allows the tabs to scroll horizontally if they exceed the width of the container.</li>
- * <li><b>Content Pane:</b> A vertical {@link ScrollableMenu} that displays the UI
+ * <li><b>Content Pane:</b> A {@link Container} that displays the UI
  * elements associated with the currently selected tab.</li>
  * </ul>
- *
- * @author Infinity Two Games
  */
 public class TabMenu extends UI {
     protected Map<String, Tab> buttons = new HashMap<>();
-    protected Map<String, ScrollableMenu> screen = new HashMap<>();
+    protected Map<String, Container> menus = new HashMap<>();
     protected String current;
     protected String fontPath;
     protected final Scene scene;
@@ -81,7 +80,7 @@ public class TabMenu extends UI {
      *
      * @return The unique UUID string of the created tab.
      */
-    public String addTab(String name) {
+    public String addTab(String name, Container content) {
         Tab tab = new Tab(this, name);
         String id = tab.id;
         if (defaultTab == null) {
@@ -91,12 +90,11 @@ public class TabMenu extends UI {
         
         grid.put(tab, 0, currentColumn);
         
-        ScrollableMenu content = new ScrollableMenu(scene, window);
         content.setWidth(tabMenu.getWidth());
         content.setHeight(height - tabMenu.getHeight());
         
         buttons.put(id, tab);
-        screen.put(id, content);
+        menus.put(id, content);
         currentColumn++;
         return id;
     }
@@ -110,7 +108,7 @@ public class TabMenu extends UI {
     }
     
     public void put(UI ui, String id) {
-        ScrollableMenu menu = screen.get(id);
+        Container menu = menus.get(id);
         if (menu == null) throw new NullPointerException("Couldn't find for tab with uuid \"" + id + "\"");
         menu.addUI(ui);
     }
@@ -122,13 +120,13 @@ public class TabMenu extends UI {
         tabMenu.draw();
         
         current = current != null? current : defaultTab;
-        screen.get(current).draw();
+        menus.get(current).draw();
     }
     
     @Override
     public void onMouseClicked(MouseButtonEvent e, int x, int y) {
         tabMenu.onMouseClicked(e, x, y);
-        SceneManager.propagateMouseClick(e, screen.get(current).getUIs());
+        SceneManager.propagateMouseClick(e, menus.get(current).getUIs());
     }
     
     @Override
@@ -145,7 +143,7 @@ public class TabMenu extends UI {
     public void cleanup() {
         tabMenu.close();
         buttons.values().forEach(UI::close);
-        screen.values().forEach(list -> list.getUIs().forEach(UI::close));
+        menus.values().forEach(list -> list.getUIs().forEach(UI::close));
     }
     
     protected static class Tab extends ToggleButton {

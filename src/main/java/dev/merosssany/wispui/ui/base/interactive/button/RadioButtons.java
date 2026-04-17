@@ -24,8 +24,6 @@ import java.util.*;
  * <li><b>Automatic UUID Tracking:</b> Buttons are stored in a {@code LinkedHashMap}
  * using generated UUID strings as keys to ensure reliable selection propagation.</li>
  * </ul>
- *
- * @author Infinity Two Games
  */
 public abstract class RadioButtons implements Container {
     protected Map<String, RadioButton> buttons = new LinkedHashMap<>();

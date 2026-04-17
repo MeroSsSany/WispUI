@@ -10,7 +10,6 @@ import org.lwjgl.opengl.*;
 
 import java.nio.FloatBuffer;
 
-import static dev.merosssany.wispui.data.Constants.UI_DESIGN_HEIGHT;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL11C.GL_COLOR_BUFFER_BIT;
 import static org.lwjgl.opengl.GL11C.GL_DEPTH_BUFFER_BIT;
@@ -27,11 +26,10 @@ import static org.lwjgl.opengl.GL11C.GL_DEPTH_BUFFER_BIT;
  * <li><b>Window Space:</b> Raw pixel coordinates provided by GLFW (0 to window width/height).</li>
  * <li><b>Virtual Space:</b> Scaled coordinates used by the UI (0 to {@code width} by {@code UI_DESIGN_HEIGHT}).</li>
  * </ul>
- * * @author Infinity Two Games
  */
 public class Display {
+    public static final int height = 1080;
     public static int width;
-    public static int height = (int) UI_DESIGN_HEIGHT;
     public static Matrix4f projection = new Matrix4f();
     private static volatile boolean enabled = true;
     
@@ -154,7 +152,7 @@ public class Display {
      * Automatically updates the virtual width and projection matrix when the window is resized.
      * <p>
      * This method maintains the aspect ratio while keeping the vertical coordinate
-     * space constant at {@code UI_DESIGN_HEIGHT}.
+     * space constant.
      * </p>
      */
     @SubscribeEvent
@@ -162,11 +160,11 @@ public class Display {
         float currentWindowWidth = e.width;
         float currentWindowHeight = e.height;
         
-        width = (int) ((currentWindowWidth / currentWindowHeight) * UI_DESIGN_HEIGHT);
+        width = (int) ((currentWindowWidth / currentWindowHeight) * height);
         projection.setOrtho(
                 0.0f,               // Left
                 width, // Right
-                UI_DESIGN_HEIGHT,   // Bottom (max Y)
+                height,   // Bottom (max Y)
                 0.0f,               // Top (min Y)
                 -1.0f,              // Near
                 1.0f                // Far

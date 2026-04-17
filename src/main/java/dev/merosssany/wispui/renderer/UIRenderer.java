@@ -22,7 +22,6 @@ import org.lwjgl.system.MemoryUtil;
 import java.nio.FloatBuffer;
 
 import static dev.merosssany.wispui.Display.transformVirtualToWindow;
-import static dev.merosssany.wispui.data.Constants.UI_DESIGN_HEIGHT;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL13.GL_TEXTURE0;
 import static org.lwjgl.opengl.GL13.glActiveTexture;
@@ -48,8 +47,6 @@ import static org.lwjgl.opengl.GL20.*;
  * <li><b>Coordinate Space:</b> Projects coordinates using an Orthographic matrix
  * based on a fixed virtual height ({@code UI_DESIGN_HEIGHT}).</li>
  * </ul>
- *
- * @author Infinity Two Games
  */
 public class UIRenderer {
     private final Window window;
@@ -582,7 +579,7 @@ public class UIRenderer {
         // Convert the width and height to window pixel space
         // NOTE: This usually involves calculating the scale factor applied to your UI
         int windowWidth = (int) (width * window.getWidth() / (float) Display.getWidth());
-        int windowHeight = (int) (height * window.getHeight() / UI_DESIGN_HEIGHT);
+        int windowHeight = (int) (height * window.getHeight() / Display.getHeight());
         
         // --- STEP 2: Flip the Y-coordinate ---
         // OpenGL's glScissor Y origin is BOTTOM-LEFT.
@@ -625,13 +622,13 @@ public class UIRenderer {
         float currentWindowWidth = e.width;
         float currentWindowHeight = e.height;
         
-        float currentVirtualWidth = (currentWindowWidth / currentWindowHeight) * UI_DESIGN_HEIGHT;
+        float currentVirtualWidth = (currentWindowWidth / currentWindowHeight) * Display.getHeight();
         
         // Set the orthographic projection matrix
         projection.setOrtho(
                 0.0f,
                 currentVirtualWidth,
-                UI_DESIGN_HEIGHT,
+                Display.height,
                 0.0f,
                 -100.0f,
                 100.0f

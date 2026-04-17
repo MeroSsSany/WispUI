@@ -134,7 +134,6 @@ public class SceneManager {
         
         boolean found = false;
         Scene scene = activeScenes.peek();
-        Label tooltip = scene.getTooltip();
         
         for (int i = uis.size() - 1; i >= 0; i--) {
             UI ui = uis.get(i);
@@ -158,22 +157,6 @@ public class SceneManager {
                         scene.addHoverTime(delta);
                     } else {
                         scene.setHoverTime(0);
-                    }
-                    
-                    // Trigger tooltip if held for 1 second and tip exists
-                    if (scene.getHoverTime() >= 1.0f && ui.getTip() != null) {
-                        scene.setActiveTooltip(ui.getTip());
-                        
-                        // Dynamic Positioning: Follow mouse but check bounds
-                        int virtualWidth = Display.getWidth();
-                        int xOffset = 12;
-                        
-                        // If tooltip went off right edge, flip it to the left
-                        if (mousePosition.x + tooltip.getWidth() + xOffset > virtualWidth) {
-                            tooltip.setOffset(mousePosition.x - tooltip.getWidth() - xOffset, mousePosition.y + 8);
-                        } else {
-                            tooltip.setOffset(mousePosition.x + xOffset, mousePosition.y + 8);
-                        }
                     }
                     
                     found = true;

@@ -29,14 +29,12 @@ import java.util.concurrent.ConcurrentHashMap;
  *
  *
  *
- * <h2>Input & Focus Handling</h2>
+ * <h2>Input And Focus Handling</h2>
  * <p>
  * This component utilizes global event listening via {@link EventBus} to implement
  * "Click-to-Dismiss" behavior. If a user clicks anywhere outside both the header
  * and the expanded menu, the dropdown automatically closes.
  * </p>
- *
- * @author Infinity Two Games
  */
 public abstract class DropdownMenu extends Button implements Container {
     protected final Scene scene;

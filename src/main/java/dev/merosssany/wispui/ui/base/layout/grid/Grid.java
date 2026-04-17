@@ -27,8 +27,6 @@ import java.util.*;
  * automatically calculate cell dimensions based on the grid's total size
  * divided by the number of columns/rows (Percentage-based sizing).
  * </p>
- *
- * @author Infinity Two Games
  */
 public class Grid extends UI implements Container {
     protected Map<UI, Cell> uis = new LinkedHashMap<>();
@@ -177,7 +175,7 @@ public class Grid extends UI implements Container {
         return uis.size() - 1;
     }
     
-    public void add(UI ui) {
+    public void addUI(UI ui) {
         int index = uis.size();
         int row = index / columns;
         int col = index % columns;
@@ -203,6 +201,10 @@ public class Grid extends UI implements Container {
     public void setPadding(int padding) {
         this.padding = padding;
         updateSize();
+    }
+    
+    public void remove(UI ui) {
+        uis.remove(ui);
     }
     
     protected record Cell(int x, int y) {

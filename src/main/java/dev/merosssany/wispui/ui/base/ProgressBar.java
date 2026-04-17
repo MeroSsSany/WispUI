@@ -28,8 +28,6 @@ import static org.joml.Math.lerp;
  * This allows the bar to react dynamically to changes in progress while
  * maintaining visual continuity.
  * </p>
- *
- * @author Infinity Two Games
  */
 public class ProgressBar extends UI implements Updatable {
     protected AtomicInteger total = new AtomicInteger(100);

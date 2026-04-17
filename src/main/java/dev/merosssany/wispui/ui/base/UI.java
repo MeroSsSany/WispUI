@@ -34,8 +34,6 @@ import java.util.Map;
  * <li><b>draw():</b> Queues the element for the {@link UIRenderer} and updates current state.</li>
  * <li><b>close():</b> Cleans up resources and shuts down attached {@link Component}s.</li>
  * </ul>
- *
- * @author Infinity Two Games
  */
 public abstract class UI implements Comparable<UI>, AutoCloseable {
     protected UIRenderer renderer;
@@ -52,6 +50,7 @@ public abstract class UI implements Comparable<UI>, AutoCloseable {
     
     protected boolean hovering = false;
     protected boolean hidden = false;
+    protected boolean displayTip = true;
     
     protected Anchor anchor = new Anchor();
     protected Pivot pivot = new Pivot(0, 0);
@@ -187,6 +186,10 @@ public abstract class UI implements Comparable<UI>, AutoCloseable {
         setAnchor(anchor.x, anchor.y);
     }
     
+    public void setAnchor(float same) {
+        setAnchor(same, same);
+    }
+    
     public void setAnchor(float x, float y) {
         anchor.set(x, y);
     }
@@ -197,6 +200,10 @@ public abstract class UI implements Comparable<UI>, AutoCloseable {
     
     public void setPivot(Pivot pivot) {
         setPivot(pivot.x, pivot.y);
+    }
+    
+    public void setPivot(float same) {
+        setPivot(same, same);
     }
     
     public Anchor getAnchor() {
@@ -236,7 +243,16 @@ public abstract class UI implements Comparable<UI>, AutoCloseable {
     }
     
     public String getTip() {
-        return tip;
+        if (isDisplayTip()) return tip;
+        return "";
+    }
+    
+    public boolean isDisplayTip() {
+        return displayTip;
+    }
+    
+    public void setDisplayTip(boolean displayTip) {
+        this.displayTip = displayTip;
     }
     
     public void setBackgroundColor(RGBA backgroundColor) {

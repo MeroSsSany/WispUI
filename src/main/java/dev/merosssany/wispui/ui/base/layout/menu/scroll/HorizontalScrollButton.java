@@ -29,8 +29,6 @@ import static org.lwjgl.glfw.GLFW.*;
  * The scroll percentage is derived from the handle's position relative to the track:
  * <code>scrollPercent = currentHandleX / (trackWidth - handleWidth)</code>
  * </p>
- *
- * @author Infinity Two Games
  */
 public class HorizontalScrollButton extends UI {
     

@@ -34,8 +34,6 @@ import static dev.merosssany.wispui.manager.SceneManager.propagateMouseHover;
  * <li><b>Input Propagation:</b> Correctly routes hover and click events to children
  * even when they are offset by scrolling.</li>
  * </ul>
- *
- * @author Infinity Two Games
  */
 public class HorizontalScrollableMenu extends UI {
     

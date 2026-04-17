@@ -19,6 +19,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.opengl.GL12.GL_BGRA;
 import static org.lwjgl.opengl.GL13.GL_TEXTURE0;
 import static org.lwjgl.opengl.GL13.glActiveTexture;
 import static org.lwjgl.opengl.GL30.glGenerateMipmap;
@@ -48,15 +49,16 @@ public class Texture {
             
             this.width = w.get(0);
             this.height = h.get(0);
+            
             // Upload image data to OpenGL
             glTexImage2D(
                     GL_TEXTURE_2D,
                     0,
-                    GL_RGBA8,
+                    param.internalFormat(),
                     width,
                     height,
                     0,
-                    GL_RGBA,
+                    param.format(),
                     GL_UNSIGNED_BYTE,
                     image
             );
@@ -101,15 +103,16 @@ public class Texture {
 
             this.width = w.get(0);
             this.height = h.get(0);
+            
             // Upload image data to OpenGL
             glTexImage2D(
                     GL_TEXTURE_2D,
                     0,
-                    GL_RGBA8,
+                    param.internalFormat(),
                     width,
                     height,
                     0,
-                    GL_RGBA,
+                    param.format(),
                     GL_UNSIGNED_BYTE,
                     image
             );
@@ -209,6 +212,19 @@ public class Texture {
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, (ByteBuffer) null);
     }
     
+    public Texture(int width, int height, TextureParameter param) {
+        this.width = width;
+        this.height = height;
+        this.textureID = glGenTextures();
+        
+        glBindTexture(GL_TEXTURE_2D, textureID);
+        
+        param.apply();
+        
+        // Allocate empty storage (NULL)
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, (ByteBuffer) null);
+    }
+    
     /**
      * Flips a BufferedImage horizontally (along the Y-axis).
      *
@@ -244,12 +260,39 @@ public class Texture {
         return flippedImage;
     }
     
-    public void update(ByteBuffer buffer, int width, int height) {
+    public void update(ByteBuffer buffer, int width, int height, TextureParameter param) {
         glBindTexture(GL_TEXTURE_2D, textureID);
         
-        // We use glTexSubImage2D so we don't re-allocate the texture memory.
-        glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, width, height, 0x80E1, // 0x80E1 is GL_BGRA
-                GL_UNSIGNED_BYTE, buffer);
+        glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+        
+        if (this.width != width || this.height != height) {
+            this.width = width;
+            this.height = height;
+            
+            glTexImage2D(
+                    GL_TEXTURE_2D,
+                    0,
+                    param.internalFormat(), // GL_RGBA8
+                    width,
+                    height,
+                    0,
+                    param.format(),         // MUST be GL_BGRA for CEF
+                    GL_UNSIGNED_BYTE,
+                    (ByteBuffer) null
+            );
+        }
+        
+        // IMPORTANT: DO NOT modify buffer position unless you fully control it
+        glTexSubImage2D(
+                GL_TEXTURE_2D,
+                0,
+                0, 0,
+                width,
+                height,
+                param.format(), // GL_BGRA
+                GL_UNSIGNED_BYTE,
+                buffer
+        );
     }
     
     private ByteBuffer convertImageToRGBA(BufferedImage image) {

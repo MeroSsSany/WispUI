@@ -22,8 +22,6 @@ import org.joml.Vector2i;
  * The final position is calculated as:
  * {@code ScreenPos = (ParentSize * Anchor) + (TextSize * Pivot) + Offset + ParentPos}
  * </p>
- *
- * @author InfinityTwo Games
  */
 public class Text implements Component {
     protected Anchor anchor = new Anchor();

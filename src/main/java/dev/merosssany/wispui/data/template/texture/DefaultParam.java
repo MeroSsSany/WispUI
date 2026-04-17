@@ -4,13 +4,6 @@ import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL30.glGenerateMipmap;
 
 public class DefaultParam implements TextureParameter {
-    private static final DefaultParam param = new DefaultParam();
-    
-    public static DefaultParam get() {
-        return param;
-    }
-    
-    private DefaultParam() {}
     
     @Override
     public void apply() {
@@ -31,5 +24,15 @@ public class DefaultParam implements TextureParameter {
     @Override
     public boolean flipTexture() {
         return false;
+    }
+    
+    @Override
+    public int internalFormat() {
+        return GL_RGBA8;
+    }
+    
+    @Override
+    public int format() {
+        return GL_RGBA;
     }
 }

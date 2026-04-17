@@ -28,8 +28,6 @@ import dev.merosssany.wispui.ui.base.animations.Updatable;
  * <li><b>State Control:</b> If {@code active} is false, the caret remains
  * hidden and stops calculating blink logic.</li>
  * </ul>
- *
- * @author Infinity Two Games
  */
 public class Caret extends UI implements Updatable {
     private float blinkTimer = 0f;

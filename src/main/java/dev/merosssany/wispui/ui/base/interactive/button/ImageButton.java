@@ -28,8 +28,6 @@ import dev.merosssany.wispui.ui.base.component.TextureRegion;
  * <li><b>Layout Sync:</b> The {@code texture.set(this)} call in the draw method
  * ensures the icon scales and moves according to the UI component's bounds.</li>
  * </ul>
- *
- * @author Infinity Two Games
  */
 public abstract class ImageButton extends UI {
     protected TextureRegion texture;

@@ -16,8 +16,6 @@ package dev.merosssany.wispui; // Or wherever you want to put utility classes
  * saveTimer.update(); // Checks if 5 seconds have passed
  * }
  * }</pre>
- *
- * @author Infinity Two Games
  */
 public class Interval {
     private volatile long lastActionTime; // Stores System.nanoTime() when the action last occurred

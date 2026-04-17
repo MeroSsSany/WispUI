@@ -21,8 +21,6 @@ import java.util.List;
  * To minimize Garbage Collection (GC) pressure, prefer methods that accept a
  * <code>dest</code> (destination) object rather than methods that return new instances.
  * </p>
- *
- * @author Infinity Two Games
  */
 public class VectorMath {
     

@@ -3,7 +3,7 @@ package dev.merosssany.wispui.data.template.texture;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL12.GL_CLAMP_TO_EDGE;
 
-public class MSDFParam implements TextureParameter {
+public class MSDFParam extends DefaultParam {
     private static final MSDFParam param = new MSDFParam();
     
     public static MSDFParam get() {
@@ -24,10 +24,5 @@ public class MSDFParam implements TextureParameter {
     @Override
     public void generateMipmap() {
     
-    }
-    
-    @Override
-    public boolean flipTexture() {
-        return false;
     }
 }

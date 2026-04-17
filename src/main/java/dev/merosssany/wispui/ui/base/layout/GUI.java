@@ -30,8 +30,6 @@ import org.joml.Vector2i;
  * to the internal {@code gui} rectangle. When you {@link #register(UI)} an element
  * to this GUI, it is automatically parented to the central frame.
  * </p>
- *
- * @author Infinity Two Games
  */
 public class GUI extends Scene {
     protected int width, height;

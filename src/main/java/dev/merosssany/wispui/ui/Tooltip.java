@@ -1,6 +1,5 @@
 package dev.merosssany.wispui.ui;
 
-import dev.merosssany.wispui.data.Constants;
 import dev.merosssany.wispui.event.input.mouse.MouseButtonEvent;
 import dev.merosssany.wispui.event.input.mouse.MouseHoverEvent;
 import dev.merosssany.wispui.event.state.WindowResizedEvent;
@@ -17,10 +16,10 @@ public class Tooltip extends UI {
     protected Scale scale = new Scale(0.75f, 0.15f);
     protected FontRenderer fontRenderer;
     
-    public Tooltip(Scene scene) {
+    public Tooltip(Scene scene, String fontPath) {
         super(scene.getRenderer());
         
-        fontRenderer = new FontRenderer(Constants.fontFilePath, 64);
+        fontRenderer = new FontRenderer(fontPath, 64);
         
         setBackgroundColor(0, 0, 0, 0.5f);
         

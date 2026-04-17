@@ -25,7 +25,6 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
-import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 
 import static org.lwjgl.glfw.GLFW.*;
@@ -46,8 +45,6 @@ import static org.lwjgl.opengl.GL11.*;
  * <strong>must</strong> be called from the main thread (the thread where GLFW
  * was initialized).
  * </p>
- *
- * @author Infinity Two Games
  */
 public class Window {
     protected long window = 0;

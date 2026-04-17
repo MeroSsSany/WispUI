@@ -4,4 +4,6 @@ public interface TextureParameter {
     void apply();
     void generateMipmap();
     boolean flipTexture();
+    int internalFormat();
+    int format();
 }
