@@ -1,5 +1,6 @@
 package dev.merosssany.wispui.ui.base.component;
 
+import dev.merosssany.wispui.ui.base.AbstractUI;
 import dev.merosssany.wispui.ui.base.UI;
 
 import java.util.*;
@@ -11,7 +12,7 @@ import java.util.stream.Stream;
 public class Radio implements Component {
     protected boolean active = false;
     protected Consumer<Boolean> event;
-    protected List<UI> uis = new ArrayList<>();
+    protected List<AbstractUI> uis = new ArrayList<>();
     
     public Radio(Consumer<Boolean> event) {
         this.event = event;
@@ -24,19 +25,19 @@ public class Radio implements Component {
         return uis.size();
     }
     
-    public boolean remove(UI o) {
+    public boolean remove(AbstractUI o) {
         return uis.remove(o);
     }
     
-    public ListIterator<UI> listIterator(int i) {
+    public ListIterator<AbstractUI> listIterator(int i) {
         return uis.listIterator(i);
     }
     
-    public boolean removeIf(Predicate<UI> filter) {
+    public boolean removeIf(Predicate<AbstractUI> filter) {
         return uis.removeIf(filter);
     }
     
-    public UI get(int i) {
+    public AbstractUI get(int i) {
         return uis.get(i);
     }
     
@@ -44,11 +45,11 @@ public class Radio implements Component {
         return uis.toArray(ts);
     }
     
-    public int lastIndexOf(UI o) {
+    public int lastIndexOf(AbstractUI o) {
         return uis.lastIndexOf(o);
     }
     
-    public void forEach(Consumer<UI> action) {
+    public void forEach(Consumer<AbstractUI> action) {
         uis.forEach(action);
     }
     
@@ -56,31 +57,31 @@ public class Radio implements Component {
         uis.clear();
     }
     
-    public boolean add(UI ui) {
+    public boolean add(AbstractUI ui) {
         return uis.add(ui);
     }
     
-    public Stream<UI> stream() {
+    public Stream<AbstractUI> stream() {
         return uis.stream();
     }
     
-    public boolean contains(UI o) {
+    public boolean contains(AbstractUI o) {
         return uis.contains(o);
     }
     
-    public Iterator<UI> iterator() {
+    public Iterator<AbstractUI> iterator() {
         return uis.iterator();
     }
     
-    public UI remove(int i) {
+    public AbstractUI remove(int i) {
         return uis.remove(i);
     }
     
-    public int indexOf(UI o) {
+    public int indexOf(AbstractUI o) {
         return uis.indexOf(o);
     }
     
-    public Stream<UI> parallelStream() {
+    public Stream<AbstractUI> parallelStream() {
         return uis.parallelStream();
     }
     
@@ -88,7 +89,7 @@ public class Radio implements Component {
         return uis.toArray();
     }
     
-    public boolean addAll(Collection<UI> collection) {
+    public boolean addAll(Collection<AbstractUI> collection) {
         return uis.addAll(collection);
     }
     
@@ -96,7 +97,7 @@ public class Radio implements Component {
         return uis.toArray(generator);
     }
     
-    public void add(int i, UI ui) {
+    public void add(int i, AbstractUI ui) {
         uis.add(i, ui);
     }
     
@@ -140,7 +141,7 @@ public class Radio implements Component {
     }
     
     @Override
-    public void setParent(UI ui) {
+    public void setParent(AbstractUI ui) {
     
     }
     

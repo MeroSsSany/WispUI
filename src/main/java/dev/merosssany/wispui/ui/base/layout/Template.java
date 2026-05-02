@@ -2,6 +2,7 @@ package dev.merosssany.wispui.ui.base.layout;
 
 import dev.merosssany.wispui.data.RGBA;
 import dev.merosssany.wispui.manager.Mouse;
+import dev.merosssany.wispui.ui.base.AbstractUI;
 import dev.merosssany.wispui.ui.base.UI;
 import dev.merosssany.wispui.ui.base.component.Component;
 import org.joml.Vector2i;
@@ -23,11 +24,11 @@ public class Template {
     protected Anchor anchor = new Anchor();
     protected Pivot pivot = new Pivot(0, 0);
     protected Vector2i offset = new Vector2i();
-    protected UI parent;
+    protected AbstractUI parent;
     protected Map<String, Component> components = new HashMap<>();
     protected Mouse.CursorType cursorType = Mouse.CursorType.ARROW;
     
-    public void apply(UI ui) {
+    public void apply(AbstractUI ui) {
         ui.setBackgroundColor(backgroundColor);
         ui.setBorderColor(borderColor);
         ui.setWidth(width);
@@ -129,11 +130,11 @@ public class Template {
         this.offset = offset;
     }
     
-    public UI getParent() {
+    public AbstractUI getParent() {
         return parent;
     }
     
-    public void setParent(UI parent) {
+    public void setParent(AbstractUI parent) {
         this.parent = parent;
     }
     

@@ -6,6 +6,7 @@ import dev.merosssany.wispui.Window;
 import dev.merosssany.wispui.event.SubscribeEvent;
 import dev.merosssany.wispui.event.bus.EventBus;
 import dev.merosssany.wispui.event.input.mouse.MouseButtonEvent;
+import dev.merosssany.wispui.ui.base.AbstractUI;
 import dev.merosssany.wispui.ui.base.UI;
 import dev.merosssany.wispui.ui.base.interactive.button.Button;
 import dev.merosssany.wispui.ui.base.layout.Anchor;
@@ -43,7 +44,7 @@ public abstract class DropdownMenu extends Button implements Container {
     protected Map<String, Button> selections = new ConcurrentHashMap<>();
     protected String selected;
     
-    private final List<UI> temp;
+    private final List<AbstractUI> temp;
     
     public DropdownMenu(Scene scene, String path, Window window) {
         super(scene, path, "> None");
@@ -74,7 +75,7 @@ public abstract class DropdownMenu extends Button implements Container {
     public void addOption(String selection) {
         Button button = new Button(scene, path, selection) {
             @Override
-            public void click(int x, int y, int action, int button) {
+            public void click(MouseButtonEvent e, int x, int y, int action, int button) {
                 select(selection);
             }
         };
@@ -185,7 +186,7 @@ public abstract class DropdownMenu extends Button implements Container {
     }
     
     @Override
-    public void click(int x, int y, int action, int button) {
+    public void click(MouseButtonEvent e, int x, int y, int action, int button) {
         menu.setHidden(!menu.isHidden());
     }
     
@@ -196,7 +197,7 @@ public abstract class DropdownMenu extends Button implements Container {
     }
     
     @Override
-    public List<UI> getUIs() {
+    public List<AbstractUI> getUIs() {
         return temp;
     }
     

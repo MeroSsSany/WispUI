@@ -2,6 +2,7 @@ package dev.merosssany.wispui.ui.base.interactive.button.check;
 
 import dev.merosssany.wispui.event.input.mouse.MouseButtonEvent;
 import dev.merosssany.wispui.event.input.mouse.MouseHoverEvent;
+import dev.merosssany.wispui.ui.base.AbstractUI;
 import dev.merosssany.wispui.ui.base.Label;
 import dev.merosssany.wispui.ui.base.UI;
 import dev.merosssany.wispui.ui.base.layout.Container;
@@ -14,10 +15,10 @@ public abstract class Checkbox extends UI implements Container {
     protected Label label;
     protected int gap = 12; // Gap between box and text
     
-    private List<UI> ui;
+    private List<AbstractUI> ui;
     
     @Override
-    public List<UI> getUIs() {
+    public List<AbstractUI> getUIs() {
         return ui;
     }
     

@@ -4,6 +4,7 @@ import dev.merosssany.wispui.Window;
 import dev.merosssany.wispui.event.input.mouse.MouseButtonEvent;
 import dev.merosssany.wispui.event.input.mouse.MouseHoverEvent;
 import dev.merosssany.wispui.manager.SceneManager;
+import dev.merosssany.wispui.ui.base.AbstractUI;
 import dev.merosssany.wispui.ui.base.UI;
 import dev.merosssany.wispui.ui.base.interactive.button.ToggleButton;
 import dev.merosssany.wispui.ui.base.layout.Container;
@@ -107,7 +108,7 @@ public class TabMenu extends UI {
         current = id;
     }
     
-    public void put(UI ui, String id) {
+    public void put(AbstractUI ui, String id) {
         Container menu = menus.get(id);
         if (menu == null) throw new NullPointerException("Couldn't find for tab with uuid \"" + id + "\"");
         menu.addUI(ui);
@@ -142,8 +143,8 @@ public class TabMenu extends UI {
     @Override
     public void cleanup() {
         tabMenu.close();
-        buttons.values().forEach(UI::close);
-        menus.values().forEach(list -> list.getUIs().forEach(UI::close));
+        buttons.values().forEach(AbstractUI::close);
+        menus.values().forEach(list -> list.getUIs().forEach(AbstractUI::close));
     }
     
     protected static class Tab extends ToggleButton {

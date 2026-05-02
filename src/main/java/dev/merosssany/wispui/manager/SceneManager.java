@@ -3,6 +3,7 @@ package dev.merosssany.wispui.manager;
 import dev.merosssany.wispui.Display;
 import dev.merosssany.wispui.event.input.mouse.MouseButtonEvent;
 import dev.merosssany.wispui.event.input.mouse.MouseHoverEvent;
+import dev.merosssany.wispui.ui.base.AbstractUI;
 import dev.merosssany.wispui.ui.base.Label;
 import dev.merosssany.wispui.ui.base.UI;
 import dev.merosssany.wispui.ui.base.layout.Scene;
@@ -107,12 +108,12 @@ public class SceneManager {
         }
     }
     
-    public static void propagateMouseClick(MouseButtonEvent e, List<UI> uis, int offestX, int offestY) {
+    public static void propagateMouseClick(MouseButtonEvent e, List<? extends AbstractUI> uis, int offestX, int offestY) {
         Vector2i mousePosition = transformWindowToVirtual(e.window, e.x, e.y);
         
         // Iterate backward (front-most to back-most)
         for (int i = uis.size() -1; i >= 0; i--) {
-            UI ui = uis.get(i);
+            AbstractUI ui = uis.get(i);
             
             // If hidden, skip this element for interaction.
             if (ui.isHidden()) {
@@ -129,14 +130,14 @@ public class SceneManager {
         }
     }
     
-    public static void propagateMouseHover(MouseHoverEvent e, List<UI> uis, int offsetX, int offsetY, float delta) {
+    public static void propagateMouseHover(MouseHoverEvent e, List<? extends AbstractUI> uis, int offsetX, int offsetY, float delta) {
         Vector2i mousePosition = transformWindowToVirtual(e.getWindow(), e.getMousePosition(), mouseTemp);
         
         boolean found = false;
         Scene scene = activeScenes.peek();
         
         for (int i = uis.size() - 1; i >= 0; i--) {
-            UI ui = uis.get(i);
+            AbstractUI ui = uis.get(i);
             if (ui.isHidden()) continue;
             
             int x = ui.getLastDrawPosition().x + offsetX;
@@ -178,15 +179,15 @@ public class SceneManager {
         lastMousePosition.set(mousePosition);
     }
     
-    public static void propagateMouseClick(MouseButtonEvent e, List<UI> uis) {
+    public static void propagateMouseClick(MouseButtonEvent e, List<? extends AbstractUI> uis) {
         propagateMouseClick(e, uis, 0, 0);
     }
     
-    public static void propagateMouseHover(MouseHoverEvent e, List<UI> uis, float delta) {
+    public static void propagateMouseHover(MouseHoverEvent e, List<? extends AbstractUI> uis, float delta) {
         propagateMouseHover(e, uis, 0, 0, delta);
     }
     
-    public static void propagateMouseHover(MouseHoverEvent e, List<UI> uis) {
+    public static void propagateMouseHover(MouseHoverEvent e, List<? extends AbstractUI> uis) {
         propagateMouseHover(e, uis, activeScenes.peek().getDelta());
     }
     

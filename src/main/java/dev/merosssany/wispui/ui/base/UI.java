@@ -35,7 +35,7 @@ import java.util.Map;
  * <li><b>close():</b> Cleans up resources and shuts down attached {@link Component}s.</li>
  * </ul>
  */
-public abstract class UI implements Comparable<UI>, AutoCloseable {
+public abstract class UI implements AbstractUI {
     protected UIRenderer renderer;
     protected Window window;
     protected RGBA backgroundColor = new RGBA();
@@ -55,7 +55,7 @@ public abstract class UI implements Comparable<UI>, AutoCloseable {
     protected Anchor anchor = new Anchor();
     protected Pivot pivot = new Pivot(0, 0);
     protected Vector2i offset = new Vector2i();
-    protected UI parent;
+    protected AbstractUI parent;
     protected Map<String, Component> components = new HashMap<>();
     protected String tip;
     protected Mouse.CursorType cursorType = Mouse.CursorType.ARROW;
@@ -94,6 +94,16 @@ public abstract class UI implements Comparable<UI>, AutoCloseable {
         addComponent(component.getClass().getSimpleName(), component);
     }
     
+    @Override
+    public void removeComponent(String component) {
+        components.remove(component);
+    }
+    
+    @Override
+    public void removeAllComponents() {
+        components.clear();
+    }
+    
     @SuppressWarnings("unchecked")
     public <T extends Component> T getComponent(String name) {
         return (T) components.get(name);
@@ -130,8 +140,8 @@ public abstract class UI implements Comparable<UI>, AutoCloseable {
             ya = (int) (Display.height * anchor.y);
         } else {
             Vector2i parentOrigin = parent.getPosition(); // Get parent's calculated screen coordinates
-            xa = parentOrigin.x + (int) (parent.width * anchor.x); // Anchor relative to parent's size
-            ya = parentOrigin.y + (int) (parent.height * anchor.y);
+            xa = parentOrigin.x + (int) (parent.getWidth() * anchor.x); // Anchor relative to parent's size
+            ya = parentOrigin.y + (int) (parent.getHeight() * anchor.y);
         }
         o = offset;
         
@@ -234,11 +244,11 @@ public abstract class UI implements Comparable<UI>, AutoCloseable {
         this.height = height;
     }
     
-    public UI getParent() {
+    public AbstractUI getParent() {
         return parent;
     }
     
-    public void setParent(UI parent) {
+    public void setParent(AbstractUI parent) {
         this.parent = parent;
     }
     
@@ -302,7 +312,7 @@ public abstract class UI implements Comparable<UI>, AutoCloseable {
         setSize(same, same);
     }
     
-    public void set(UI ui) {
+    public void set(AbstractUI ui) {
         setSize(ui.getWidth(), ui.getHeight());
         setBackgroundColor(ui.getBackgroundColor());
         setPosition(ui.getAnchor(), ui.getPivot(), ui.getMutableOffset());
@@ -383,11 +393,6 @@ public abstract class UI implements Comparable<UI>, AutoCloseable {
     
     public void setCornerRadius(float cornerRadius) {
         this.cornerRadius = cornerRadius;
-    }
-    
-    @Override
-    public int compareTo(UI ui) {
-        return Integer.compare(drawOrder, ui.drawOrder);
     }
     
     @Override

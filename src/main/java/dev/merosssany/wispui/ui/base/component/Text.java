@@ -3,6 +3,7 @@ package dev.merosssany.wispui.ui.base.component;
 import dev.merosssany.wispui.Display;
 import dev.merosssany.wispui.data.RGBA;
 import dev.merosssany.wispui.renderer.FontRenderer;
+import dev.merosssany.wispui.ui.base.AbstractUI;
 import dev.merosssany.wispui.ui.base.UI;
 import dev.merosssany.wispui.ui.base.layout.Anchor;
 import dev.merosssany.wispui.ui.base.layout.Pivot;
@@ -27,7 +28,7 @@ public class Text implements Component {
     protected Anchor anchor = new Anchor();
     protected Pivot pivot = new Pivot(0, 0);
     protected Vector2i offset = new Vector2i();
-    protected UI parent = null;
+    protected AbstractUI parent = null;
     protected FontRenderer renderer;
     protected String text = "";
     protected RGBA color = new RGBA(1, 1, 1, 1);
@@ -73,11 +74,11 @@ public class Text implements Component {
         this.offset = offset;
     }
 
-    public UI getParent() {
+    public AbstractUI getParent() {
         return parent;
     }
 
-    public void setParent(UI parent) {
+    public void setParent(AbstractUI parent) {
         this.parent = parent;
     }
     

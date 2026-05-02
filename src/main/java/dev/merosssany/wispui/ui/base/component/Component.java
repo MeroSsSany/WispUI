@@ -1,6 +1,6 @@
 package dev.merosssany.wispui.ui.base.component;
 
-import dev.merosssany.wispui.ui.base.UI;
+import dev.merosssany.wispui.ui.base.AbstractUI;
 
 public interface Component {
     void draw();
@@ -9,7 +9,7 @@ public interface Component {
     int getDrawOrder();
     void cleanup();
     
-    void setParent(UI ui);
+    void setParent(AbstractUI ui);
     
     Component copy();
 }

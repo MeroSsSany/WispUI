@@ -76,19 +76,3 @@ publishing {
         }
     }
 }
-
-tasks.register("run", JavaExec) {
-    group = "application"
-    mainClass = "Test"
-    classpath = sourceSets.main.runtimeClasspath
-
-    jvmArgs += [
-            "-Dmixin.debug=true"
-    ]
-}
-
-
-run {
-    workingDir = project.projectDir
-    systemProperty "jcef.path", project.projectDir.absolutePath + "/jcef-bundle"
-}

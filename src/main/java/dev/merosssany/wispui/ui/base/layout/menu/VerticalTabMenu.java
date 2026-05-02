@@ -3,6 +3,7 @@ package dev.merosssany.wispui.ui.base.layout.menu;
 import dev.merosssany.wispui.Window;
 import dev.merosssany.wispui.event.input.mouse.MouseButtonEvent;
 import dev.merosssany.wispui.event.input.mouse.MouseHoverEvent;
+import dev.merosssany.wispui.ui.base.AbstractUI;
 import dev.merosssany.wispui.ui.base.UI;
 import dev.merosssany.wispui.ui.base.interactive.button.ToggleButton;
 import dev.merosssany.wispui.ui.base.layout.Container;
@@ -41,7 +42,7 @@ public class VerticalTabMenu extends UI implements Container {
     private final Grid grid;
     private final ScrollableMenu tabSidebar; // Changed to standard vertical ScrollableMenu
     private int currentRow = 0; // Track rows instead of columns
-    private final List<UI> temp = new ArrayList<>();
+    private final List<AbstractUI> temp = new ArrayList<>();
     
     /**
      * Creates a new Tab Menu.
@@ -130,7 +131,7 @@ public class VerticalTabMenu extends UI implements Container {
      * @param id
      *         The UUID of the tab (returned by addTab).
      */
-    public void put(UI ui, String id) {
+    public void put(AbstractUI ui, String id) {
         ScrollableMenu menu = screen.get(id);
         if (menu == null) throw new NullPointerException("Couldn't find for tab with uuid \"" + id + "\"");
         menu.addUI(ui);
@@ -162,12 +163,12 @@ public class VerticalTabMenu extends UI implements Container {
     @Override
     public void cleanup() {
         tabSidebar.close();
-        buttons.values().forEach(UI::close);
-        screen.values().forEach(list -> list.getUIs().forEach(UI::close));
+        buttons.values().forEach(AbstractUI::close);
+        screen.values().forEach(list -> list.getUIs().forEach(AbstractUI::close));
     }
     
     @Override
-    public List<UI> getUIs() {
+    public List<AbstractUI> getUIs() {
         temp.clear();
         temp.addAll(screen.get(current).getUIs());
         temp.add(tabSidebar);
@@ -175,7 +176,7 @@ public class VerticalTabMenu extends UI implements Container {
     }
     
     @Override
-    public void addUI(UI ui) {
+    public void addUI(AbstractUI ui) {
         put(ui, current);
     }
     

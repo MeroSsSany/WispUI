@@ -7,6 +7,7 @@ import dev.merosssany.wispui.event.input.mouse.MouseButtonEvent;
 import dev.merosssany.wispui.event.input.mouse.MouseHoverEvent;
 import dev.merosssany.wispui.renderer.UIRenderer;
 import dev.merosssany.wispui.ui.base.UI;
+import dev.merosssany.wispui.ui.base.interactive.Clickable;
 
 import static org.lwjgl.glfw.GLFW.GLFW_RELEASE;
 
@@ -20,14 +21,14 @@ import static org.lwjgl.glfw.GLFW.GLFW_RELEASE;
  *
  * <h2>Interaction Flow</h2>
  * <ul>
- * <li><b>Release-to-Trigger:</b> To prevent accidental clicks, the {@link #clicked}
+ * <li><b>Release-to-Trigger:</b> To prevent accidental clicks, the {@link #click}
  * callback only fires if the mouse button is released while still inside
  * the button's boundaries.</li>
  * <li><b>Visual Dimming:</b> Uses a direct color subtraction logic to darken
  * the background upon hover, providing immediate user feedback.</li>
  * </ul>
  */
-public abstract class BasicButton extends UI {
+public abstract class BasicButton extends UI implements Clickable {
     protected RGBA original = backgroundColor.copy();
     
     public BasicButton(UIRenderer renderer) {
@@ -38,7 +39,7 @@ public abstract class BasicButton extends UI {
     public void onMouseClicked(MouseButtonEvent e, int x, int y) {
         if (e.action == GLFW_RELEASE) {
             if (VectorMath.isPointWithinRectangle(getLastDrawPosition(),e.x,e.y, getLastDrawEndPoint())) {
-                clicked(e);
+                click(e, x, y, e.action, e.button);
             }
         }
     }
@@ -68,6 +69,4 @@ public abstract class BasicButton extends UI {
     public void cleanup() {
     
     }
-    
-    public abstract void clicked(MouseButtonEvent e);
 }

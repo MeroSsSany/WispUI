@@ -9,6 +9,7 @@ import dev.merosssany.wispui.data.TextureAtlas;
 import dev.merosssany.wispui.event.SubscribeEvent;
 import dev.merosssany.wispui.event.bus.EventBus;
 import dev.merosssany.wispui.event.state.WindowResizedEvent;
+import dev.merosssany.wispui.ui.base.AbstractUI;
 import dev.merosssany.wispui.ui.base.UI;
 import org.joml.Matrix4f;
 import org.joml.Vector2i;
@@ -169,7 +170,7 @@ public class UIRenderer {
         }
     }
     
-    public void queue(UI ui) {
+    public void queue(AbstractUI ui) {
         // --- BATCH BREAK: Switching from Textured to Untextured ---
         if (currentBatchIsTextured) {
             flush();
@@ -264,7 +265,7 @@ public class UIRenderer {
         vertexDataIndex += quad.length;
     }
     
-    public void queueTextured(int textureIndex, TextureAtlas atlas, RGBA foregroundColor, UI ui) {
+    public void queueTextured(int textureIndex, TextureAtlas atlas, RGBA foregroundColor, AbstractUI ui) {
         // --- BATCH BREAK: Switching texture OR switching from untextured ---
         int atlasID = atlas.getTexture().getTextureID();
         
@@ -363,7 +364,7 @@ public class UIRenderer {
         vertexDataIndex += quad.length;
     }
     
-    public void queueTextureDirect(Texture texture, RGBA foregroundColor, UI ui) {
+    public void queueTextureDirect(Texture texture, RGBA foregroundColor, AbstractUI ui) {
         int textureID = texture.getTextureID();
         
         // --- BATCH BREAK: If we switch from an atlas to a direct texture, or change direct textures ---

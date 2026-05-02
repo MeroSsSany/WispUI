@@ -7,6 +7,7 @@ import dev.merosssany.wispui.event.input.mouse.MouseButtonEvent;
 import dev.merosssany.wispui.renderer.UIRenderer;
 import dev.merosssany.wispui.ui.Background;
 import dev.merosssany.wispui.ui.Rectangle;
+import dev.merosssany.wispui.ui.base.AbstractUI;
 import dev.merosssany.wispui.ui.base.UI;
 import org.joml.Vector2i;
 
@@ -128,7 +129,7 @@ public class GUI extends Scene {
         gui.setSize(same);
     }
     
-    public void set(UI ui) {
+    public void set(AbstractUI ui) {
         gui.set(ui);
     }
     
@@ -147,7 +148,7 @@ public class GUI extends Scene {
     }
     
     @Override
-    public int register(UI ui) {
+    public int register(AbstractUI ui) {
         ui.setParent(gui);
         return super.register(ui);
     }
@@ -177,7 +178,7 @@ public class GUI extends Scene {
             gui.setAnchor(x, y);
         }
         
-        public void set(UI ui) {
+        public void set(AbstractUI ui) {
             gui.set(ui);
         }
         

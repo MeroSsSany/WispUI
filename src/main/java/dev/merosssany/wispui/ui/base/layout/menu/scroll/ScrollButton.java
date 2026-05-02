@@ -9,6 +9,7 @@ import dev.merosssany.wispui.event.input.mouse.MouseCoordinatesEvent;
 import dev.merosssany.wispui.event.input.mouse.MouseHoverEvent;
 import dev.merosssany.wispui.renderer.UIRenderer;
 import dev.merosssany.wispui.ui.Rectangle;
+import dev.merosssany.wispui.ui.base.AbstractUI;
 import dev.merosssany.wispui.ui.base.UI;
 import dev.merosssany.wispui.ui.base.layout.Anchor;
 import dev.merosssany.wispui.ui.base.layout.Pivot;
@@ -38,7 +39,7 @@ import static org.lwjgl.glfw.GLFW.*;
  */
 public class ScrollButton extends UI { // The Scroll Handle/Thumb
     protected final ScrollableMenu menu;
-    protected final UI scrollTrack; // The visual Scroll Track (Container)
+    protected final AbstractUI scrollTrack; // The visual Scroll Track (Container)
     protected final RGBA original = backgroundColor.copy();
     protected final Window window;
     
@@ -233,12 +234,12 @@ public class ScrollButton extends UI { // The Scroll Handle/Thumb
     }
     
     @Override
-    public void setParent(UI parent) {
+    public void setParent(AbstractUI parent) {
         scrollTrack.setParent(parent);
     }
     
     @Override
-    public UI getParent() {
+    public AbstractUI getParent() {
         return scrollTrack.getParent();
     }
     

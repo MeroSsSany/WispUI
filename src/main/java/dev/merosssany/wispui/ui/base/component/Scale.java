@@ -4,6 +4,7 @@ import dev.merosssany.wispui.Display;
 import dev.merosssany.wispui.event.SubscribeEvent;
 import dev.merosssany.wispui.event.bus.EventBus;
 import dev.merosssany.wispui.event.state.WindowResizedEvent;
+import dev.merosssany.wispui.ui.base.AbstractUI;
 import dev.merosssany.wispui.ui.base.UI;
 
 /**
@@ -16,7 +17,7 @@ import dev.merosssany.wispui.ui.base.UI;
  * Offsets are added in pixels after ratio scaling.
  */
 public class Scale implements Component {
-    protected UI parent;
+    protected AbstractUI parent;
     protected float xRatio, yRatio;
     protected int width, height;
     protected int offsetWidth, offsetHeight;
@@ -65,11 +66,11 @@ public class Scale implements Component {
         updateSize();
     }
     
-    public UI getParent() {
+    public AbstractUI getParent() {
         return parent;
     }
     
-    public void setParent(UI parent) {
+    public void setParent(AbstractUI parent) {
         this.parent = parent;
     }
     

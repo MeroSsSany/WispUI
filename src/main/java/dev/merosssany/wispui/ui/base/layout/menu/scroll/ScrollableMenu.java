@@ -6,6 +6,7 @@ import dev.merosssany.wispui.event.bus.EventBus;
 import dev.merosssany.wispui.event.input.mouse.MouseButtonEvent;
 import dev.merosssany.wispui.event.input.mouse.MouseHoverEvent;
 import dev.merosssany.wispui.event.input.mouse.MouseScrollEvent;
+import dev.merosssany.wispui.ui.base.AbstractUI;
 import dev.merosssany.wispui.ui.base.UI;
 import dev.merosssany.wispui.ui.base.animations.Animation;
 import dev.merosssany.wispui.ui.base.layout.Anchor;
@@ -41,7 +42,7 @@ import static dev.merosssany.wispui.manager.SceneManager.propagateMouseClick;
  * </ul>
  */
 public class ScrollableMenu extends UI implements Container {
-    protected List<UI> uis = new ArrayList<>();
+    protected List<AbstractUI> uis = new ArrayList<>();
     protected int padding = 5;
     protected int contentHeight;
     protected ScrollButton scrollButton;
@@ -51,7 +52,7 @@ public class ScrollableMenu extends UI implements Container {
     protected float targetScrollY;
     protected float scrollLerpSpeed = 50f; // Higher = faster/snappier, Lower = smoother/slower
     
-    private final ArrayList<UI> handle = new ArrayList<>();
+    private final ArrayList<AbstractUI> handle = new ArrayList<>();
     
     // Update setScrollY to only handle the target
     public void setTargetScrollY(float target) {
@@ -75,7 +76,7 @@ public class ScrollableMenu extends UI implements Container {
         setupScrollbar();
     }
     
-    public void addUI(UI ui) {
+    public void addUI(AbstractUI ui) {
         ui.setParent(this);
         uis.add(ui);
         update();
@@ -88,7 +89,7 @@ public class ScrollableMenu extends UI implements Container {
     }
     
     private void update() {
-        for (UI ui : uis) {
+        for (AbstractUI ui : uis) {
             if (!handle.contains(ui)) {
                 handle.add(ui);
             }
@@ -96,18 +97,18 @@ public class ScrollableMenu extends UI implements Container {
     }
     
     public void clear() {
-        for (UI ui : uis) ui.close();
+        for (AbstractUI ui : uis) ui.close();
         uis.clear();
         contentHeight = 0;
         setupScrollbar();
     }
     
-    public void removeUI(UI ui) {
+    public void removeUI(AbstractUI ui) {
         uis.remove(ui);
         handle.remove(ui);
         
         contentHeight = 0;
-        for (UI u : uis) {
+        for (AbstractUI u : uis) {
             contentHeight = Math.max(u.getHeight() + u.getPosition().y() + padding, contentHeight);
         }
         
@@ -115,7 +116,7 @@ public class ScrollableMenu extends UI implements Container {
         setupScrollbar();
     }
     
-    public void removeAll(Collection<? extends UI> collection) {
+    public void removeAll(Collection<? extends AbstractUI> collection) {
         uis.removeAll(collection);
     }
     
@@ -157,7 +158,7 @@ public class ScrollableMenu extends UI implements Container {
         super.draw();
         
         renderer.enableScissor(getPosition(), width, height);
-        for (UI ui : uis) {
+        for (AbstractUI ui : uis) {
             ui.addOffset(0, scrollY);
             ui.draw();
             ui.addOffset(0, -scrollY);
@@ -171,7 +172,7 @@ public class ScrollableMenu extends UI implements Container {
     public void setDrawOrder(int drawOrder) {
         super.setDrawOrder(drawOrder);
         
-        for (UI ui : uis) ui.setDrawOrder(drawOrder + 1);
+        for (AbstractUI ui : uis) ui.setDrawOrder(drawOrder + 1);
     }
     
     @Override
@@ -182,7 +183,7 @@ public class ScrollableMenu extends UI implements Container {
         setupScrollbar();
     }
     
-    public List<UI> getUIs() {
+    public List<AbstractUI> getUIs() {
         return handle;
     }
     
@@ -302,15 +303,15 @@ public class ScrollableMenu extends UI implements Container {
     
     @Override
     public void onMouseHoverEnded() {
-        for (UI ui : uis) ui.onMouseHoverEnded();
+        for (AbstractUI ui : uis) ui.onMouseHoverEnded();
     }
     
     @Override
     public void cleanup() {
-        for (UI ui : uis) ui.close();
+        for (AbstractUI ui : uis) ui.close();
     }
     
-    public <U extends UI> void addAll(Collection<U> collection) {
+    public <U extends AbstractUI> void addAll(Collection<U> collection) {
         for (U ui : collection) addUI(ui);
     }
 }

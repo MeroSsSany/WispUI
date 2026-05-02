@@ -2,6 +2,7 @@ package dev.merosssany.wispui.ui.base.layout;
 
 import dev.merosssany.wispui.event.input.mouse.MouseButtonEvent;
 import dev.merosssany.wispui.event.input.mouse.MouseHoverEvent;
+import dev.merosssany.wispui.ui.base.AbstractUI;
 import dev.merosssany.wispui.ui.base.UI;
 
 import java.util.ArrayList;
@@ -22,7 +23,7 @@ import java.util.List;
  * </p>
  */
 public class Panel extends UI implements Container {
-    private final List<UI> children = new ArrayList<>();
+    private final List<AbstractUI> children = new ArrayList<>();
     
     public Panel(Scene scene) {
         super(scene.getRenderer());
@@ -38,7 +39,7 @@ public class Panel extends UI implements Container {
      * @param ui
      *         The element to nest.
      */
-    public void addUI(UI ui) {
+    public void addUI(AbstractUI ui) {
         children.add(ui);
         ui.setParent(this);
     }
@@ -49,7 +50,7 @@ public class Panel extends UI implements Container {
      * @param ui
      *         The element to remove.
      */
-    public void removeUI(UI ui) {
+    public void removeUI(AbstractUI ui) {
         children.remove(ui);
         ui.setParent(null);
     }
@@ -58,14 +59,14 @@ public class Panel extends UI implements Container {
      * @return The list of nested UI elements for hit-testing and iteration.
      */
     @Override
-    public List<UI> getUIs() {
+    public List<AbstractUI> getUIs() {
         return children;
     }
     
     @Override
     public void draw() {
         super.draw();
-        for (UI child : children) {
+        for (AbstractUI child : children) {
             child.draw();
         }
     }

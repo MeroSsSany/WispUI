@@ -1,5 +1,6 @@
 package dev.merosssany.wispui.ui.base.layout.grid;
 
+import dev.merosssany.wispui.ui.base.AbstractUI;
 import dev.merosssany.wispui.ui.base.UI;
 import org.joml.Vector2i;
 
@@ -30,7 +31,7 @@ import java.util.Set;
  * </p>
  */
 public class StatelessGrid {
-    protected Map<UI, Vector2i> uis = new LinkedHashMap<>(); // UI mapped to Grid Coordinates (Col, Row)
+    protected Map<AbstractUI, Vector2i> uis = new LinkedHashMap<>(); // UI mapped to Grid Coordinates (Col, Row)
     protected int columns = 1;
     protected int space;
     protected int padding;
@@ -54,8 +55,8 @@ public class StatelessGrid {
      * </p>
      */
     public void updateLayout() {
-        for (Map.Entry<UI, Vector2i> entry : uis.entrySet()) {
-            UI ui = entry.getKey();
+        for (Map.Entry<AbstractUI, Vector2i> entry : uis.entrySet()) {
+            AbstractUI ui = entry.getKey();
             Vector2i gridPos = entry.getValue(); // x = col, y = row
             
             int xOffset = padding + (gridPos.x * (cellSize.x + space));
@@ -73,7 +74,7 @@ public class StatelessGrid {
      * @param ui
      *         The element to manage.
      */
-    public void add(UI ui) {
+    public void add(AbstractUI ui) {
         int index = uis.size();
         int row = index / columns;
         int col = index % columns;
@@ -117,7 +118,7 @@ public class StatelessGrid {
         this.cellSize.set(cellSize);
     }
     
-    public Set<UI> getUIs() {
+    public Set<AbstractUI> getUIs() {
         return uis.keySet();
     }
     

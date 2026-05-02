@@ -5,6 +5,7 @@ import dev.merosssany.wispui.event.input.mouse.MouseButtonEvent;
 import dev.merosssany.wispui.event.input.mouse.MouseHoverEvent;
 import dev.merosssany.wispui.manager.Mouse;
 import dev.merosssany.wispui.ui.base.Label;
+import dev.merosssany.wispui.ui.base.interactive.Clickable;
 import dev.merosssany.wispui.ui.base.layout.Anchor;
 import dev.merosssany.wispui.ui.base.layout.Pivot;
 import dev.merosssany.wispui.ui.base.layout.Scene;
@@ -30,7 +31,7 @@ import org.joml.Vector2i;
  * the button bounds using Anchors and Pivots.</li>
  * </ul>
  */
-public abstract class Button extends Label {
+public abstract class Button extends Label implements Clickable  {
     protected RGBA original;
     protected RGBA originalBorder;
     protected boolean hoverEnabled = true;
@@ -105,11 +106,6 @@ public abstract class Button extends Label {
     
     @Override
     public void onMouseClicked(MouseButtonEvent e, int x, int y) {
-        if (enabled) click(x,y, e.action, e.button);
+        if (enabled) click(e, x,y, e.action, e.button);
     }
-    
-    /**
-     * Abstract callback for implementation-specific click logic.
-     */
-    public abstract void click(int x, int y, int action, int button);
 }

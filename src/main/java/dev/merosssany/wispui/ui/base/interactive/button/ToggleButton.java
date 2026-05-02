@@ -37,7 +37,7 @@ public abstract class ToggleButton extends Button {
     }
     
     @Override
-    public void click(int x, int y, int action, int button) {
+    public void click(MouseButtonEvent e, int x, int y, int action, int button) {
         if (action != GLFW_RELEASE) {
             setToggle(!toggle);
             onToggle(toggle);

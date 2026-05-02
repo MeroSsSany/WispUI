@@ -8,6 +8,7 @@ import dev.merosssany.wispui.manager.Mouse;
 import dev.merosssany.wispui.renderer.UIRenderer;
 import dev.merosssany.wispui.ui.base.UI;
 import dev.merosssany.wispui.ui.base.component.TextureRegion;
+import dev.merosssany.wispui.ui.base.interactive.Clickable;
 
 /**
  * A graphical button component that renders a specific region of a Texture Atlas.
@@ -29,7 +30,7 @@ import dev.merosssany.wispui.ui.base.component.TextureRegion;
  * ensures the icon scales and moves according to the UI component's bounds.</li>
  * </ul>
  */
-public abstract class ImageButton extends UI {
+public abstract class ImageButton extends UI implements Clickable {
     protected TextureRegion texture;
 
     public ImageButton(UIRenderer renderer, TextureAtlas atlas, int textureIndex) {
@@ -64,8 +65,6 @@ public abstract class ImageButton extends UI {
     
     @Override
     public void onMouseClicked(MouseButtonEvent event, int relativeX, int relativeY) {
-        clicked(relativeX, relativeY, event.action, event.button);
+        click(event, relativeX, relativeY, event.action, event.button);
     }
-    
-    public abstract void clicked(int x, int y, int action, int button);
 }

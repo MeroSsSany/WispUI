@@ -4,6 +4,7 @@ import dev.merosssany.wispui.Display;
 import dev.merosssany.wispui.event.SubscribeEvent;
 import dev.merosssany.wispui.event.bus.EventBus;
 import dev.merosssany.wispui.event.state.WindowResizedEvent;
+import dev.merosssany.wispui.ui.base.AbstractUI;
 import dev.merosssany.wispui.ui.base.UI;
 import org.joml.Vector2i;
 
@@ -145,7 +146,7 @@ public class AspectRatio implements Component {
     }
     
     @Override
-    public void setParent(UI ui) {
+    public void setParent(AbstractUI ui) {
     
     }
     

@@ -7,6 +7,7 @@ import dev.merosssany.wispui.event.input.mouse.MouseButtonEvent;
 import dev.merosssany.wispui.event.input.mouse.MouseCoordinatesEvent;
 import dev.merosssany.wispui.event.input.mouse.MouseHoverEvent;
 import dev.merosssany.wispui.event.input.mouse.MouseScrollEvent;
+import dev.merosssany.wispui.ui.base.AbstractUI;
 import dev.merosssany.wispui.ui.base.UI;
 import dev.merosssany.wispui.ui.base.layout.Anchor;
 import dev.merosssany.wispui.ui.base.layout.Pivot;
@@ -37,7 +38,7 @@ import static dev.merosssany.wispui.manager.SceneManager.propagateMouseHover;
  */
 public class HorizontalScrollableMenu extends UI {
     
-    protected ArrayList<UI> uis = new ArrayList<>();
+    protected ArrayList<AbstractUI> uis = new ArrayList<>();
     protected int padding = 5;
     protected int contentWidth;
     protected HorizontalScrollButton scrollButton;
@@ -57,7 +58,7 @@ public class HorizontalScrollableMenu extends UI {
         setupScrollbar();
     }
     
-    public void addUI(UI ui) {
+    public void addUI(AbstractUI ui) {
         uis.add(ui);
         ui.setParent(this);
         
@@ -67,11 +68,11 @@ public class HorizontalScrollableMenu extends UI {
         setupScrollbar();
     }
     
-    public void removeUI(UI ui) {
+    public void removeUI(AbstractUI ui) {
         uis.remove(ui);
         
         contentWidth = 0;
-        for (UI u : uis) {
+        for (AbstractUI u : uis) {
             contentWidth = Math.max(u.getWidth() + u.getPosition().x() + padding, contentWidth);
         }
         
@@ -89,7 +90,7 @@ public class HorizontalScrollableMenu extends UI {
         super.draw();
         renderer.enableScissor(getPosition(), width, height);
         
-        for (UI ui : uis) {
+        for (AbstractUI ui : uis) {
             ui.addOffset(scrollX, 0);
             ui.draw();
             ui.addOffset(-scrollX, 0);
@@ -101,7 +102,7 @@ public class HorizontalScrollableMenu extends UI {
     @Override
     public void setDrawOrder(int drawOrder) {
         super.setDrawOrder(drawOrder);
-        for (UI ui : uis) ui.setDrawOrder(drawOrder + 1);
+        for (AbstractUI ui : uis) ui.setDrawOrder(drawOrder + 1);
     }
     
     @Override
@@ -192,7 +193,7 @@ public class HorizontalScrollableMenu extends UI {
     
     @Override
     public void cleanup() {
-        for (UI ui : uis) ui.close();
+        for (AbstractUI ui : uis) ui.close();
     }
 }
 

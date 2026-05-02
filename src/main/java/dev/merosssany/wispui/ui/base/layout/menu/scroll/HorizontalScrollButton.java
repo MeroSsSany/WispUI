@@ -9,6 +9,7 @@ import dev.merosssany.wispui.event.input.mouse.MouseCoordinatesEvent;
 import dev.merosssany.wispui.event.input.mouse.MouseHoverEvent;
 import dev.merosssany.wispui.renderer.UIRenderer;
 import dev.merosssany.wispui.ui.Rectangle;
+import dev.merosssany.wispui.ui.base.AbstractUI;
 import dev.merosssany.wispui.ui.base.UI;
 
 import static dev.merosssany.wispui.Display.transformWindowToVirtual;
@@ -156,12 +157,12 @@ public class HorizontalScrollButton extends UI {
     }
     
     @Override
-    public void setParent(UI parent) {
+    public void setParent(AbstractUI parent) {
         scrollTrack.setParent(parent);
     }
     
     @Override
-    public UI getParent() {
+    public AbstractUI getParent() {
         return scrollTrack.getParent();
     }
     

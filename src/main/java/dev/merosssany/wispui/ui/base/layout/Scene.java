@@ -8,6 +8,7 @@ import dev.merosssany.wispui.event.input.mouse.MouseButtonEvent;
 import dev.merosssany.wispui.event.input.mouse.MouseHoverEvent;
 import dev.merosssany.wispui.manager.Mouse;
 import dev.merosssany.wispui.renderer.UIRenderer;
+import dev.merosssany.wispui.ui.base.AbstractUI;
 import dev.merosssany.wispui.ui.base.UI;
 import dev.merosssany.wispui.ui.base.animations.Updatable;
 import org.joml.Vector2f;
@@ -36,7 +37,7 @@ import static dev.merosssany.wispui.VectorMath.isPointWithinRectangle;
  */
 public class Scene {
     protected final UIRenderer renderer;
-    protected final List<UI> uis;
+    protected final List<AbstractUI> uis;
     protected final Window window;
     protected float delta; // in seconds
     protected boolean handleInput = true;
@@ -61,7 +62,7 @@ public class Scene {
         return renderer;
     }
     
-    public int register(UI ui) {
+    public int register(AbstractUI ui) {
         if (!uis.contains(ui)) {
             int l = uis.size();
             uis.add(ui);
@@ -126,14 +127,14 @@ public class Scene {
      *
      * @return {@code true} if a hover event was consumed by a UI element.
      */
-    protected boolean calculateHover(List<UI> uis) {
+    protected boolean calculateHover(List<AbstractUI> uis) {
         Vector2f m = window.getMousePosition();
         Vector2i mousePosition = transformWindowToVirtual(window, m, mouseTemp);
         
         boolean hoverHandled = false;
         
         for (int i = uis.size() - 1; i >= 0; i--) {
-            UI ui = uis.get(i);
+            AbstractUI ui = uis.get(i);
             
             if (ui.isHidden()) {
                 if (ui.isHovering()) {
@@ -188,7 +189,7 @@ public class Scene {
     }
     
     protected void drawUIs() {
-        for (UI ui : uis) {
+        for (AbstractUI ui : uis) {
             if (!ui.isHidden()) {
                 if (ui instanceof Updatable updatable) {
                     updatable.update(delta);
@@ -210,13 +211,13 @@ public class Scene {
      * container itself consumes the click.
      * </p>
      */
-    private boolean doMouseClick(MouseButtonEvent e, List<UI> uis) {
+    private boolean doMouseClick(MouseButtonEvent e, List<AbstractUI> uis) {
         if (!handleInput) return false;
         Vector2i mousePosition = transformWindowToVirtual(window, e.x, e.y);
         
         // Iterate backward (front-most UI to back-most UI)
         for (int i = uis.size() - 1; i >= 0; i--) {
-            UI ui = uis.get(i);
+            AbstractUI ui = uis.get(i);
             
             if (ui.isHidden()) continue;
             
@@ -259,7 +260,7 @@ public class Scene {
     }
     
     public void cleanup() {
-        for (UI ui : new ArrayList<>(uis)) {
+        for (AbstractUI ui : new ArrayList<>(uis)) {
             ui.close();
         }
         uis.clear();
@@ -279,7 +280,7 @@ public class Scene {
         setHandleInput(false);
     }
     
-    public void unregister(UI ui) {
+    public void unregister(AbstractUI ui) {
         uis.remove(ui);
     }
     

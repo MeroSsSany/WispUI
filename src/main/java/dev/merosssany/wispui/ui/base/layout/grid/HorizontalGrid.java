@@ -1,6 +1,7 @@
 package dev.merosssany.wispui.ui.base.layout.grid;
 
 
+import dev.merosssany.wispui.ui.base.AbstractUI;
 import dev.merosssany.wispui.ui.base.UI;
 import dev.merosssany.wispui.ui.base.layout.Scene;
 import dev.merosssany.wispui.ui.base.layout.menu.scroll.ScrollableMenu;
@@ -17,7 +18,7 @@ import static java.lang.Math.max;
  *
  * <h2>Key Features</h2>
  * <ul>
- * <li><b>Auto-Flow:</b> Adding a UI element via {@link #put(UI)} automatically
+ * <li><b>Auto-Flow:</b> Adding a UI element via {@link #put(AbstractUI)} automatically
  * places it in the next available row.</li>
  * <li><b>Width Stretching:</b> Tracks the widest element in the grid and can
  * optionally stretch all children to match that width.</li>
@@ -44,7 +45,7 @@ public class HorizontalGrid extends Grid {
      * @param ui
      *         The UI component to add.
      */
-    public void put(UI ui) {
+    public void put(AbstractUI ui) {
         put(ui, 0, current++);
         maxWidth = max(ui.getWidth(), maxWidth);
         ui.setWidth(maxWidth);
@@ -62,7 +63,7 @@ public class HorizontalGrid extends Grid {
         if (layoutDirty) {
             // Calculate total required height and track max width
             int currentY = padding;
-            for (UI ui : uis.keySet()) {
+            for (AbstractUI ui : uis.keySet()) {
                 // If cellSize.y is 0, use auto-height
                 int h = (cellSize.y <= 0)? ui.getHeight() : cellSize.y;
                 
@@ -77,6 +78,6 @@ public class HorizontalGrid extends Grid {
         }
         
         super.draw();
-        uis.keySet().forEach(UI::draw);
+        uis.keySet().forEach(AbstractUI::draw);
     }
 }

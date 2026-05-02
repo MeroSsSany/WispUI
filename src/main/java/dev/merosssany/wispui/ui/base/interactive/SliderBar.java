@@ -7,6 +7,7 @@ import dev.merosssany.wispui.event.input.mouse.MouseButtonEvent;
 import dev.merosssany.wispui.event.input.mouse.MouseCoordinatesEvent;
 import dev.merosssany.wispui.event.input.mouse.MouseHoverEvent;
 import dev.merosssany.wispui.renderer.UIRenderer;
+import dev.merosssany.wispui.ui.base.AbstractUI;
 import dev.merosssany.wispui.ui.base.UI;
 import dev.merosssany.wispui.ui.base.interactive.button.BasicButton;
 import dev.merosssany.wispui.ui.base.layout.Anchor;
@@ -46,15 +47,15 @@ public abstract class SliderBar extends UI implements Container {
     protected int max;
     protected boolean held;
     
-    private final List<UI> temp;
+    private final List<AbstractUI> temp;
     
     public SliderBar(UIRenderer renderer) {
         super(renderer);
         
         button = new BasicButton(renderer) {
             @Override
-            public void clicked(MouseButtonEvent e) {
-                if (e.action == GLFW_PRESS && e.button == GLFW_MOUSE_BUTTON_1) {
+            public void click(MouseButtonEvent e, int relativeX, int relativeY, int action, int button) {
+                if (action == GLFW_PRESS && button == GLFW_MOUSE_BUTTON_1) {
                     held = true;
                     mouseXOffset = Display.transformWindowToVirtual(e.window, e.x);
                 }
@@ -186,7 +187,7 @@ public abstract class SliderBar extends UI implements Container {
     }
     
     @Override
-    public List<UI> getUIs() {
+    public List<AbstractUI> getUIs() {
         return temp;
     }
     

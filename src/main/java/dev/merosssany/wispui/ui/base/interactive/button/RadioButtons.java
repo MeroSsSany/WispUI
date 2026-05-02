@@ -1,5 +1,6 @@
 package dev.merosssany.wispui.ui.base.interactive.button;
 
+import dev.merosssany.wispui.ui.base.AbstractUI;
 import dev.merosssany.wispui.ui.base.UI;
 import dev.merosssany.wispui.ui.base.layout.Container;
 import dev.merosssany.wispui.ui.base.layout.Scene;
@@ -37,7 +38,7 @@ public abstract class RadioButtons implements Container {
     }
     
     @Override
-    public List<UI> getUIs() {
+    public List<AbstractUI> getUIs() {
         return List.copyOf(buttons.values());
     }
     

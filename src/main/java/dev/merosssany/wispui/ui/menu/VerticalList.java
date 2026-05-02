@@ -1,6 +1,7 @@
 package dev.merosssany.wispui.ui.menu;
 
 import dev.merosssany.wispui.Window;
+import dev.merosssany.wispui.ui.base.AbstractUI;
 import dev.merosssany.wispui.ui.base.UI;
 import dev.merosssany.wispui.ui.base.layout.Scene;
 import dev.merosssany.wispui.ui.base.layout.grid.Grid;
@@ -32,17 +33,17 @@ public class VerticalList extends ScrollableMenu {
     }
     
     @Override
-    public void addUI(UI ui) {
+    public void addUI(AbstractUI ui) {
         items.addUI(ui);
     }
     
     @Override
-    public void removeUI(UI ui) {
+    public void removeUI(AbstractUI ui) {
         items.remove(ui);
     }
     
     @Override
-    public void removeAll(Collection<? extends UI> collection) {
+    public void removeAll(Collection<? extends AbstractUI> collection) {
         super.removeAll(collection);
     }
     

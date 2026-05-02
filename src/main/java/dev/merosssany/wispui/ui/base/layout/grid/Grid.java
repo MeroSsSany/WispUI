@@ -3,6 +3,7 @@ package dev.merosssany.wispui.ui.base.layout.grid;
 import dev.merosssany.wispui.event.input.mouse.MouseButtonEvent;
 import dev.merosssany.wispui.event.input.mouse.MouseHoverEvent;
 import dev.merosssany.wispui.renderer.UIRenderer;
+import dev.merosssany.wispui.ui.base.AbstractUI;
 import dev.merosssany.wispui.ui.base.UI;
 import dev.merosssany.wispui.ui.base.UIBuilder;
 import dev.merosssany.wispui.ui.base.layout.Container;
@@ -29,8 +30,8 @@ import java.util.*;
  * </p>
  */
 public class Grid extends UI implements Container {
-    protected Map<UI, Cell> uis = new LinkedHashMap<>();
-    protected List<UI> temp = Collections.synchronizedList(new ArrayList<>());
+    protected Map<AbstractUI, Cell> uis = new LinkedHashMap<>();
+    protected List<AbstractUI> temp = Collections.synchronizedList(new ArrayList<>());
     protected int columns;
     protected int rows;
     protected int space;
@@ -62,13 +63,13 @@ public class Grid extends UI implements Container {
         return padding;
     }
     
-    public UI get(int row, int column) {
+    public AbstractUI get(int row, int column) {
         return get(row * columns + column);
     }
     
-    public UI get(int index) {
+    public AbstractUI get(int index) {
         int i = 0;
-        for (UI ui : uis.keySet()) {
+        for (AbstractUI ui : uis.keySet()) {
             if (i++ == index)
                 return ui;
         }
@@ -92,7 +93,7 @@ public class Grid extends UI implements Container {
     
     }
     
-    private List<UI> getTempUIs() {
+    private List<AbstractUI> getTempUIs() {
         temp.clear();
         temp.addAll(uis.keySet());
         return temp;
@@ -110,7 +111,7 @@ public class Grid extends UI implements Container {
     
     @Override
     public void cleanup() {
-        for (UI ui : uis.keySet()) {
+        for (AbstractUI ui : uis.keySet()) {
             ui.close();
         }
         
@@ -129,7 +130,7 @@ public class Grid extends UI implements Container {
         
         super.draw(); // Draw the grid's background/border
         
-        for (UI ui : uis.keySet()) {
+        for (AbstractUI ui : uis.keySet()) {
             ui.draw();
         }
     }
@@ -139,8 +140,8 @@ public class Grid extends UI implements Container {
      * every child based on padding, spacing, and cell dimensions.
      */
     private void layout() {
-        for (Map.Entry<UI, Cell> entry : uis.entrySet()) {
-            UI ui = entry.getKey();
+        for (Map.Entry<AbstractUI, Cell> entry : uis.entrySet()) {
+            AbstractUI ui = entry.getKey();
             Cell cell = entry.getValue();
             
             // Calculate dimensions
@@ -167,7 +168,7 @@ public class Grid extends UI implements Container {
      *
      * @return The new size of the child map.
      */
-    public int put(UI ui, int row, int column) {
+    public int put(AbstractUI ui, int row, int column) {
         ui.setParent(this);
         layoutDirty = true;
         
@@ -175,7 +176,7 @@ public class Grid extends UI implements Container {
         return uis.size() - 1;
     }
     
-    public void addUI(UI ui) {
+    public void addUI(AbstractUI ui) {
         int index = uis.size();
         int row = index / columns;
         int col = index % columns;
@@ -194,7 +195,7 @@ public class Grid extends UI implements Container {
         cellSize.set(width, height);
     }
     
-    public List<UI> getUIs() {
+    public List<AbstractUI> getUIs() {
         return getTempUIs();
     }
     
@@ -203,7 +204,7 @@ public class Grid extends UI implements Container {
         updateSize();
     }
     
-    public void remove(UI ui) {
+    public void remove(AbstractUI ui) {
         uis.remove(ui);
     }
     
