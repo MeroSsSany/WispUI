@@ -9,7 +9,6 @@ import dev.merosssany.wispui.ui.base.layout.Scene;
 
 import java.util.List;
 
-// MODIFIED
 public abstract class Checkbox extends UI implements Container {
     protected Check check;
     protected Label label;

@@ -5,7 +5,6 @@ import java.nio.*;
 import static org.lwjgl.system.MemoryUtil.memAlloc;
 import static org.lwjgl.system.MemoryUtil.memFree;
 
-// MODIFIED
 public class NByteBuffer extends NativeBuffer {
     private ByteBuffer buffer;
     

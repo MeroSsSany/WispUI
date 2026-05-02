@@ -4,7 +4,6 @@ import dev.merosssany.wispui.Window;
 import dev.merosssany.wispui.event.Event;
 import org.joml.Vector2i;
 
-// MODIFIED
 public class MouseHoverEvent extends Event {
     private final Vector2i mousePosition;
     private final Window window;

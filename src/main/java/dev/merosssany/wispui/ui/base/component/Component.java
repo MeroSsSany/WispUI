@@ -2,7 +2,6 @@ package dev.merosssany.wispui.ui.base.component;
 
 import dev.merosssany.wispui.ui.base.UI;
 
-// MODIFIED
 public interface Component {
     void draw();
     void setAngle(float angle);

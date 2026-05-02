@@ -3,7 +3,6 @@ package dev.merosssany.wispui.event.input.mouse;
 import dev.merosssany.wispui.Window;
 import dev.merosssany.wispui.event.Event;
 
-// MODIFIED
 public class MouseCoordinatesEvent extends Event {
     private float x;
     private float y;

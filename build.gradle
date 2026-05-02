@@ -44,6 +44,7 @@ dependencies {
     api "org.lwjgl:lwjgl-stb"
 
     implementation 'me.friwi:jcefmaven:143.0.14'
+    implementation 'org.slf4j:slf4j-simple:2.0.7'
     implementation platform("org.lwjgl:lwjgl-bom:3.3.3")
 
     runtimeOnly "org.lwjgl:lwjgl::$lwjglNatives"
@@ -60,7 +61,7 @@ java {
     toolchain {
         languageVersion = JavaLanguageVersion.of(17)
     }
-    withSourcesJar() // Essential for libraries so you can see code in Nyctotile
+    withSourcesJar()
     withJavadocJar()
 }
 
@@ -84,4 +85,10 @@ tasks.register("run", JavaExec) {
     jvmArgs += [
             "-Dmixin.debug=true"
     ]
+}
+
+
+run {
+    workingDir = project.projectDir
+    systemProperty "jcef.path", project.projectDir.absolutePath + "/jcef-bundle"
 }

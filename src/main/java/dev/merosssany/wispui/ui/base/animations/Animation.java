@@ -5,7 +5,6 @@ import org.joml.Vector2i;
 import static java.lang.Math.pow;
 import static org.joml.Math.*;
 
-// MODIFIED
 /**
  * Provides a collection of static methods for applying common easing functions
  * to two-dimensional {@code Vector2i} objects, facilitating complex UI and game animations.
