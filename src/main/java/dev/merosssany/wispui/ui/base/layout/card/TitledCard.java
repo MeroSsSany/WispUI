@@ -36,6 +36,7 @@ public class TitledCard extends Panel implements Container {
     
     @Override
     public void draw() {
+        super.draw();
         title.draw();
         text.draw();
     }

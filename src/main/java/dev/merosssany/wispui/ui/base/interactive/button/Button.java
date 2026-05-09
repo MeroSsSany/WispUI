@@ -5,7 +5,7 @@ import dev.merosssany.wispui.event.input.mouse.MouseButtonEvent;
 import dev.merosssany.wispui.event.input.mouse.MouseHoverEvent;
 import dev.merosssany.wispui.manager.Mouse;
 import dev.merosssany.wispui.ui.base.Label;
-import dev.merosssany.wispui.ui.base.interactive.Clickable;
+import dev.merosssany.wispui.ui.base.interactive.ClickableUI;
 import dev.merosssany.wispui.ui.base.layout.Anchor;
 import dev.merosssany.wispui.ui.base.layout.Pivot;
 import dev.merosssany.wispui.ui.base.layout.Scene;
@@ -31,7 +31,7 @@ import org.joml.Vector2i;
  * the button bounds using Anchors and Pivots.</li>
  * </ul>
  */
-public abstract class Button extends Label implements Clickable  {
+public abstract class Button extends Label implements ClickableUI {
     protected RGBA original;
     protected RGBA originalBorder;
     protected boolean hoverEnabled = true;

@@ -28,7 +28,7 @@ import org.joml.Vector2i;
  * <h2>Positioning Logic</h2>
  * <p>
  * All positioning methods (anchor, pivot, offset) in this class delegate directly
- * to the internal {@code gui} rectangle. When you {@link #register(UI)} an element
+ * to the internal {@code gui} rectangle. When you {@link #register(AbstractUI)} an element
  * to this GUI, it is automatically parented to the central frame.
  * </p>
  */

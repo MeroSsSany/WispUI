@@ -7,7 +7,7 @@ import dev.merosssany.wispui.event.input.mouse.MouseButtonEvent;
 import dev.merosssany.wispui.event.input.mouse.MouseHoverEvent;
 import dev.merosssany.wispui.renderer.UIRenderer;
 import dev.merosssany.wispui.ui.base.UI;
-import dev.merosssany.wispui.ui.base.interactive.Clickable;
+import dev.merosssany.wispui.ui.base.interactive.ClickableUI;
 
 import static org.lwjgl.glfw.GLFW.GLFW_RELEASE;
 
@@ -28,7 +28,7 @@ import static org.lwjgl.glfw.GLFW.GLFW_RELEASE;
  * the background upon hover, providing immediate user feedback.</li>
  * </ul>
  */
-public abstract class BasicButton extends UI implements Clickable {
+public abstract class BasicButton extends UI implements ClickableUI {
     protected RGBA original = backgroundColor.copy();
     
     public BasicButton(UIRenderer renderer) {
