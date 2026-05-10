@@ -38,7 +38,7 @@ public abstract class ToggleButton extends Button {
     
     @Override
     public void click(MouseButtonEvent e, int x, int y, int action, int button) {
-        if (action != GLFW_RELEASE) {
+        if (action != GLFW_RELEASE && enabled) {
             setToggle(!toggle);
             onToggle(toggle);
         }
@@ -82,7 +82,7 @@ public abstract class ToggleButton extends Button {
     /**
      * Internal method to calculate the background color based on
      * both the toggle state and the mouse hover state.
-     * @param isHovering Whether the mouse is currently over the button.
+     * @param isHovering Whether the mouse is currently over the 
      */
     private void updateVisuals(boolean isHovering) {
         float d = 0.0f;
@@ -95,5 +95,23 @@ public abstract class ToggleButton extends Button {
                 Math.max(0, original.b() - d),
                 original.a()
         );
+    }
+    
+    public static class Builder extends Button.Builder {
+        protected boolean toggle;
+        
+        public boolean toggle() {
+            return toggle;
+        }
+        
+        public Builder toggle(boolean toggle) {
+            this.toggle = toggle;
+            return this;
+        }
+        
+        public void apply(ToggleButton b) {
+            super.apply(b);
+            b.toggle = toggle;
+        }
     }
 }

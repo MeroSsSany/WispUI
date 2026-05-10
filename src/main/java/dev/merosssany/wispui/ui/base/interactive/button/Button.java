@@ -108,4 +108,33 @@ public abstract class Button extends Label implements ClickableUI {
     public void onMouseClicked(MouseButtonEvent e, int x, int y) {
         if (enabled) click(e, x,y, e.action, e.button);
     }
+    
+    public static class Builder extends Label.Builder {
+        protected boolean hoverFeedbackEnabled = true;
+        protected boolean enabled = true;
+        
+        public boolean hoverFeedbackEnabled() {
+            return hoverFeedbackEnabled;
+        }
+        
+        public Builder hoverFeedbackEnabled(boolean hoverFeedbackEnabled) {
+            this.hoverFeedbackEnabled = hoverFeedbackEnabled;
+            return this;
+        }
+        
+        public boolean enabled() {
+            return enabled;
+        }
+        
+        public Builder enabled(boolean enabled) {
+            this.enabled = enabled;
+            return this;
+        }
+        
+        public void apply(Button ui) {
+            super.apply(ui);
+            ui.enabled = enabled;
+            ui.hoverEnabled = hoverFeedbackEnabled;
+        }
+    }
 }

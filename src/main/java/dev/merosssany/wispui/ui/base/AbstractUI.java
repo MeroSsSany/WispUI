@@ -69,6 +69,7 @@ public interface AbstractUI extends Comparable<AbstractUI>, AutoCloseable {
     void setHeight(int height);
     
     @Deprecated String getTip();
+    @Deprecated void setTip(String tip);
     @Deprecated boolean isDisplayTip();
     @Deprecated void setDisplayTip(boolean displayTip);
     
@@ -125,4 +126,5 @@ public interface AbstractUI extends Comparable<AbstractUI>, AutoCloseable {
     void onMouseHover(MouseHoverEvent e);
     void onMouseHoverEnded();
     void cleanup();
+    
 }

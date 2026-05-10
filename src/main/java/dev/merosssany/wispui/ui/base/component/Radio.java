@@ -1,7 +1,6 @@
 package dev.merosssany.wispui.ui.base.component;
 
 import dev.merosssany.wispui.ui.base.AbstractUI;
-import dev.merosssany.wispui.ui.base.UI;
 
 import java.util.*;
 import java.util.function.Consumer;
@@ -154,5 +153,48 @@ public class Radio implements Component {
     
     public boolean isActive() {
         return active;
+    }
+    
+    public static class Builder {
+        protected Radio radio = new Radio();
+        
+        public Builder add(AbstractUI ui) {
+            radio.add(ui);
+            return this;
+        }
+        
+        public Builder addAll(Collection<AbstractUI> collection) {
+            radio.addAll(collection);
+            return this;
+        }
+        
+        public Builder remove(AbstractUI o) {
+            radio.remove(o);
+            return this;
+        }
+        
+        public Builder removeIf(Predicate<AbstractUI> filter) {
+            radio.removeIf(filter);
+            return this;
+        }
+        
+        public Builder lastIndexOf(AbstractUI o) {
+            radio.lastIndexOf(o);
+            return this;
+        }
+        
+        public Builder remove(int i) {
+            radio.remove(i).close();
+            return this;
+        }
+        
+        public Builder add(int i, AbstractUI ui) {
+            radio.add(i, ui);
+            return this;
+        }
+        
+        public Radio build() {
+            return radio;
+        }
     }
 }

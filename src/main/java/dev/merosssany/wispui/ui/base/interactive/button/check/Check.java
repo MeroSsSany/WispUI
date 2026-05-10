@@ -91,4 +91,22 @@ public abstract class Check extends UI {
     }
     
     public abstract void onCheck(boolean check);
+    
+    public static class Builder extends UI.Builder {
+        protected boolean checked;
+        
+        public boolean checked() {
+            return checked;
+        }
+        
+        public Builder checked(boolean checked) {
+            this.checked = checked;
+            return this;
+        }
+        
+        public void apply(Check check) {
+            super.apply(check);
+            check.checked = checked;
+        }
+    }
 }

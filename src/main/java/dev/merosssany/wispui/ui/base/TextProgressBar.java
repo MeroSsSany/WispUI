@@ -102,10 +102,6 @@ public class TextProgressBar extends Label implements Updatable {
         this.text = text;
     }
     
-    public static ProgressBarBuilder builder(Scene renderer, String font) {
-        return new ProgressBarBuilder(renderer, font);
-    }
-    
     public long getTotal() {
         return total.get();
     }
@@ -140,29 +136,33 @@ public class TextProgressBar extends Label implements Updatable {
         bar.draw();
     }
     
-    public static class ProgressBarBuilder extends UIBuilder<TextProgressBar> {
-        public ProgressBarBuilder(Scene renderer, String font) {
-            super(new TextProgressBar(renderer, font, 10));
-        }
+    public static class Builder extends Label.Builder {
+        private int max;
+        private int current;
+        private Rectangle bar;
         
-        public ProgressBarBuilder max(int max) {
-            ui.setTotal(max);
+        public Builder max(int max) {
+            this.max = max;
             return this;
         }
         
-        public ProgressBarBuilder current(int current) {
-            ui.setCurrent(current);
+        public Builder current(int current) {
+            this.current = current;
             return this;
         }
         
-        public ProgressBarBuilder bar(Rectangle.RectangleBuilder builder) {
-            ui.bar = builder.build();
+        public Builder bar(Rectangle.Builder builder) {
+            this.bar = builder.build();
             return this;
         }
         
-        @Override
-        public ProgressBarBuilder applyDefault() {
-            return this;
+        public TextProgressBar build() {
+            TextProgressBar b = new TextProgressBar(scene, fontPath);
+            apply(b);
+            b.bar = bar;
+            b.current = new AtomicLong(current);
+            b.total = new AtomicLong(max);
+            return b;
         }
     }
 }

@@ -80,4 +80,46 @@ public class TitledCard extends Panel implements Container {
     public void setColor(float r, float g, float b, float a) {
         text.setColor(r, g, b, a);
     }
+    
+    public static class Builder {
+        protected Label title;
+        protected Label text;
+        protected int textHeight, titleHeight;
+        
+        public Label title() {
+            return title;
+        }
+        
+        public Builder title(Label title) {
+            this.title = title;
+            return this;
+        }
+        
+        public Label text() {
+            return text;
+        }
+        
+        public Builder text(Label text) {
+            this.text = text;
+            return this;
+        }
+        
+        public int textHeight() {
+            return textHeight;
+        }
+        
+        public int titleHeight() {
+            return titleHeight;
+        }
+        
+        public Builder textHeight(int textHeight) {
+            this.textHeight = textHeight;
+            return this;
+        }
+        
+        public Builder titleHeight(int titleHeight) {
+            this.titleHeight = titleHeight;
+            return this;
+        }
+    }
 }

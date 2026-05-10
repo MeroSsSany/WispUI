@@ -9,6 +9,7 @@ import dev.merosssany.wispui.event.input.mouse.MouseHoverEvent;
 import dev.merosssany.wispui.renderer.UIRenderer;
 import dev.merosssany.wispui.ui.base.AbstractUI;
 import dev.merosssany.wispui.ui.base.UI;
+import dev.merosssany.wispui.ui.base.UIBuilder;
 import dev.merosssany.wispui.ui.base.interactive.button.BasicButton;
 import dev.merosssany.wispui.ui.base.layout.Anchor;
 import dev.merosssany.wispui.ui.base.layout.Container;
@@ -198,4 +199,17 @@ public abstract class SliderBar extends UI implements Container {
      *         The final integer value determined by the slider position.
      */
     public abstract void onSelect(int selected);
+    
+    public static class Builder extends UI.Builder {
+        private int max;
+        
+        public Builder max(int max) {
+            this.max = max;
+            return this;
+        }
+        
+        public void apply(SliderBar bar) {
+            bar.max = max;
+        }
+    }
 }

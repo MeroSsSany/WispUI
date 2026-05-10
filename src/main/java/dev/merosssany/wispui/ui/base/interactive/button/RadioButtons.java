@@ -1,7 +1,6 @@
 package dev.merosssany.wispui.ui.base.interactive.button;
 
 import dev.merosssany.wispui.ui.base.AbstractUI;
-import dev.merosssany.wispui.ui.base.UI;
 import dev.merosssany.wispui.ui.base.layout.Container;
 import dev.merosssany.wispui.ui.base.layout.Scene;
 
@@ -85,7 +84,9 @@ public abstract class RadioButtons implements Container {
     
     /**
      * Abstract callback executed when a new selection is made.
-     * @param button The newly active {@link RadioButton} instance.
+     *
+     * @param button
+     *         The newly active {@link RadioButton} instance.
      */
     public abstract void onSelect(RadioButton button);
     
@@ -99,7 +100,9 @@ public abstract class RadioButtons implements Container {
      * This method iterates through the collection, setting the target to {@code true}
      * and all others to {@code false}, then triggers the {@link #onSelect} callback.
      * </p>
-     * @param uuid The unique identifier of the button to be activated.
+     *
+     * @param uuid
+     *         The unique identifier of the button to be activated.
      */
     public void select(UUID uuid) {
         String targetId = uuid.toString();
@@ -137,6 +140,61 @@ public abstract class RadioButtons implements Container {
             }
             // Deactivate all siblings
             radio.select(uuid);
+        }
+    }
+    
+    public static class Builder extends ToggleButton.Builder {
+        protected Map<String, RadioButton> buttons = new LinkedHashMap<>();
+        protected int cellWidth, cellHeight;
+        protected Scene scene;
+        protected String path;
+        
+        public int cellWidth() {
+            return cellWidth;
+        }
+        
+        public Builder cellWidth(int cellWidth) {
+            this.cellWidth = cellWidth;
+            return this;
+        }
+        
+        public int cellHeight() {
+            return cellHeight;
+        }
+        
+        public Builder cellHeight(int cellHeight) {
+            this.cellHeight = cellHeight;
+            return this;
+        }
+        
+        public Scene scene() {
+            return scene;
+        }
+        
+        public Builder scene(Scene scene) {
+            this.scene = scene;
+            return this;
+        }
+        
+        public String path() {
+            return path;
+        }
+        
+        public Builder path(String path) {
+            this.path = path;
+            return this;
+        }
+        
+        public RadioButton put(String key, RadioButton value) {
+            return buttons.put(key, value);
+        }
+        
+        public void putAll(Map<? extends String, ? extends RadioButton> m) {
+            buttons.putAll(m);
+        }
+        
+        public RadioButton putIfAbsent(String key, RadioButton value) {
+            return buttons.putIfAbsent(key, value);
         }
     }
 }

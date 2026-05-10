@@ -155,4 +155,84 @@ public class Scale implements Component {
     public float getRatioX() {
         return xRatio;
     }
+    
+    public static class Builder {
+        protected AbstractUI parent;
+        protected float xRatio, yRatio;
+        protected int width, height;
+        protected int offsetWidth, offsetHeight;
+        
+        public AbstractUI parent() {
+            return parent;
+        }
+        
+        public Builder parent(AbstractUI parent) {
+            this.parent = parent;
+            return this;
+        }
+        
+        public float xRatio() {
+            return xRatio;
+        }
+        
+        public Builder xRatio(float xRatio) {
+            this.xRatio = xRatio;
+            return this;
+        }
+        
+        public float yRatio() {
+            return yRatio;
+        }
+        
+        public Builder yRatio(float yRatio) {
+            this.yRatio = yRatio;
+            return this;
+        }
+        
+        public int width() {
+            return width;
+        }
+        
+        public Builder width(int width) {
+            this.width = width;
+            return this;
+        }
+        
+        public int height() {
+            return height;
+        }
+        
+        public Builder height(int height) {
+            this.height = height;
+            return this;
+        }
+        
+        public int offsetWidth() {
+            return offsetWidth;
+        }
+        
+        public Builder offsetWidth(int offsetWidth) {
+            this.offsetWidth = offsetWidth;
+            return this;
+        }
+        
+        public int offsetHeight() {
+            return offsetHeight;
+        }
+        
+        public Builder offsetHeight(int offsetHeight) {
+            this.offsetHeight = offsetHeight;
+            return this;
+        }
+        
+        public Scale build() {
+            Scale scale = new Scale(xRatio, yRatio);
+            scale.height = height;
+            scale.offsetHeight = offsetHeight;
+            scale.offsetWidth = offsetWidth;
+            scale.parent = parent;
+            scale.width = width;
+            return scale;
+        }
+    }
 }

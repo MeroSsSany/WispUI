@@ -7,7 +7,6 @@ import dev.merosssany.wispui.event.SubscribeEvent;
 import dev.merosssany.wispui.event.bus.EventBus;
 import dev.merosssany.wispui.event.input.mouse.MouseButtonEvent;
 import dev.merosssany.wispui.ui.base.AbstractUI;
-import dev.merosssany.wispui.ui.base.UI;
 import dev.merosssany.wispui.ui.base.interactive.button.Button;
 import dev.merosssany.wispui.ui.base.layout.Anchor;
 import dev.merosssany.wispui.ui.base.layout.Container;
@@ -72,7 +71,7 @@ public abstract class DropdownMenu extends Button implements Container {
      * </p>
      * @param selection The text label and ID for the option.
      */
-    public void addOption(String selection) {
+    public DropdownMenu addOption(String selection) {
         Button button = new Button(scene, path, selection) {
             @Override
             public void click(MouseButtonEvent e, int x, int y, int action, int button) {
@@ -86,6 +85,7 @@ public abstract class DropdownMenu extends Button implements Container {
         grid.add(button);
         menu.addUI(button);
         selections.put(selection, button);
+        return this;
     }
     
     /**

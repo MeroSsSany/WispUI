@@ -59,7 +59,7 @@ public class VerticalTabMenu extends UI implements Container {
         this.window = window;
         
         // 1. Grid setup: Switch to 1 column and multiple rows
-        grid = new Grid.Builder(scene)
+        grid = new Grid.Builder()
                 .cellSize(sidebarWidth, 50) // Fixed height for each tab button
                 .columns(1)
                 .build();

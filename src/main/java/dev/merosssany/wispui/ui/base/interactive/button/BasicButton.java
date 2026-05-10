@@ -69,4 +69,6 @@ public abstract class BasicButton extends UI implements ClickableUI {
     public void cleanup() {
     
     }
+    
+    public static class Builder extends UI.Builder {}
 }

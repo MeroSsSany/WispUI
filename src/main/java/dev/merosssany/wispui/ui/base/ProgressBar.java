@@ -3,6 +3,7 @@ package dev.merosssany.wispui.ui.base;
 import dev.merosssany.wispui.data.RGBA;
 import dev.merosssany.wispui.event.input.mouse.MouseButtonEvent;
 import dev.merosssany.wispui.event.input.mouse.MouseHoverEvent;
+import dev.merosssany.wispui.renderer.UIRenderer;
 import dev.merosssany.wispui.ui.Rectangle;
 import dev.merosssany.wispui.ui.base.animations.Updatable;
 import dev.merosssany.wispui.ui.base.layout.Anchor;
@@ -47,17 +48,13 @@ public class ProgressBar extends UI implements Updatable {
         bar.setParent(this);
     }
     
-    public ProgressBar(Scene renderer) {
-        super(renderer.getRenderer());
-        bar = new Rectangle(renderer.getRenderer());
+    public ProgressBar(UIRenderer renderer) {
+        super(renderer);
+        bar = new Rectangle(renderer);
         
         bar.setBackgroundColor(new RGBA(1, 0, 1f, 1));
         bar.setPosition(new Anchor(0, 0.5f), new Pivot(0, 0.5f));
         bar.setParent(this);
-    }
-    
-    public static ProgressBarBuilder builder(Scene renderer, int max) {
-        return new ProgressBarBuilder(renderer, max);
     }
     
     /**
@@ -152,29 +149,32 @@ public class ProgressBar extends UI implements Updatable {
         bar.setWidth((int) clamp(lerp(bar.getWidth(), targetWidth, delta * speed), 0, width));
     }
     
-    public static class ProgressBarBuilder extends UIBuilder<ProgressBar> {
-        public ProgressBarBuilder(Scene renderer, int max) {
-            super(new ProgressBar(renderer, max));
-        }
+    public static class Builder extends UI.Builder {
+        private int max;
+        private int current;
+        private Rectangle bar;
         
-        public ProgressBarBuilder max(int max) {
-            ui.setTotal(max);
+        public Builder max(int max) {
+            this.max = max;
             return this;
         }
         
-        public ProgressBarBuilder current(int current) {
-            ui.setCurrent(current);
+        public Builder current(int current) {
+            this.current = current;
             return this;
         }
         
-        public ProgressBarBuilder bar(Rectangle.RectangleBuilder builder) {
-            ui.bar = builder.build();
+        public Builder bar(Rectangle.Builder builder) {
+            this.bar = builder.build();
             return this;
         }
         
-        @Override
-        public ProgressBarBuilder applyDefault() {
-            return this;
+        public ProgressBar build() {
+            ProgressBar b = new ProgressBar(renderer);
+            b.bar = bar;
+            b.current = new AtomicInteger(current);
+            b.total = new AtomicInteger(max);
+            return b;
         }
     }
 }

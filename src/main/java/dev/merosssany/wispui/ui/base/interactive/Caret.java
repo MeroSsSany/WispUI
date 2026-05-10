@@ -5,7 +5,6 @@ import dev.merosssany.wispui.event.input.mouse.MouseButtonEvent;
 import dev.merosssany.wispui.event.input.mouse.MouseHoverEvent;
 import dev.merosssany.wispui.renderer.UIRenderer;
 import dev.merosssany.wispui.ui.base.UI;
-import dev.merosssany.wispui.ui.base.UIBuilder;
 import dev.merosssany.wispui.ui.base.animations.Updatable;
 
 /**
@@ -33,10 +32,6 @@ public class Caret extends UI implements Updatable {
     private float blinkTimer = 0f;
     private boolean visible = true;
     private boolean active = true;
-    
-    public static CaretBuilder builder(UIRenderer renderer) {
-        return new CaretBuilder(renderer);
-    }
     
     public Caret(UIRenderer renderer) {
         super(renderer);
@@ -117,20 +112,6 @@ public class Caret extends UI implements Updatable {
         super.draw();
     }
     
-    public static class CaretBuilder extends UIBuilder<Caret> {
-        public CaretBuilder(UIRenderer renderer) {
-            super(new Caret(renderer));
-        }
-        
-        public CaretBuilder active(boolean active) {
-            ui.setActive(active);
-            return this;
-        }
-        
-        @Override
-        public CaretBuilder applyDefault() {
-            return this;
-        }
-    }
+    public static class Builder extends UI.Builder {}
 }
 

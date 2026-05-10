@@ -1,8 +1,6 @@
 package dev.merosssany.wispui.ui.base.layout.grid;
 
-
 import dev.merosssany.wispui.ui.base.AbstractUI;
-import dev.merosssany.wispui.ui.base.UI;
 import dev.merosssany.wispui.ui.base.layout.Scene;
 import dev.merosssany.wispui.ui.base.layout.menu.scroll.ScrollableMenu;
 

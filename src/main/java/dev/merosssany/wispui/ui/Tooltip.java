@@ -11,6 +11,7 @@ import dev.merosssany.wispui.ui.base.layout.Anchor;
 import dev.merosssany.wispui.ui.base.layout.Pivot;
 import dev.merosssany.wispui.ui.base.layout.Scene;
 
+@Deprecated
 public class Tooltip extends UI {
     protected Text text;
     protected Scale scale = new Scale(0.75f, 0.15f);

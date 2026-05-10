@@ -4,7 +4,6 @@ import dev.merosssany.wispui.data.RGBA;
 import dev.merosssany.wispui.event.input.mouse.MouseButtonEvent;
 import dev.merosssany.wispui.event.input.mouse.MouseHoverEvent;
 import dev.merosssany.wispui.renderer.FontRenderer;
-import dev.merosssany.wispui.renderer.UIRenderer;
 import dev.merosssany.wispui.ui.base.component.Text;
 import dev.merosssany.wispui.ui.base.layout.Anchor;
 import dev.merosssany.wispui.ui.base.layout.Pivot;
@@ -295,24 +294,30 @@ public class Label extends UI {
         text.setColor(r, g, b, a);
     }
     
-    public static class LabelBuilder<T extends Label> extends UIBuilder<T> {
-        public LabelBuilder(UIRenderer renderer, T element) {
-            super(element);
+    public static class Builder extends UI.Builder {
+        protected String fontPath;
+        protected Scene scene;
+        
+        public String fontPath() {
+            return fontPath;
         }
         
-        public UIBuilder<T> textPosition(Anchor anchor, Pivot pivot, Vector2i offset) {
-            ui.setTextPosition(anchor, pivot, offset);
+        public Builder fontPath(String fontPath) {
+            this.fontPath = fontPath;
             return this;
         }
         
-        public UIBuilder<T> text(String text) {
-            ui.setText(text);
+        public Scene scene() {
+            return scene;
+        }
+        
+        public Builder scene(Scene scene) {
+            this.scene = scene;
             return this;
         }
         
-        @Override
-        public UIBuilder<T> applyDefault() {
-            return this;
+        public Label build() {
+            return new Label(scene, fontPath);
         }
     }
     

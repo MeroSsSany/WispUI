@@ -39,8 +39,8 @@ public class Image extends UI implements Component {
         tint.set(r, g, b, a);
     }
     
-    public RGBA setForegroundColor(RGBA color) {
-        return tint.set(color);
+    public void setForegroundColor(RGBA color) {
+        tint.set(color);
     }
     
     public Texture getTexture() {
@@ -85,5 +85,46 @@ public class Image extends UI implements Component {
     @Override
     public Component copy() {
         return new Image(renderer);
+    }
+    
+    public static class Builder extends UI.Builder {
+        protected Texture texture;
+        protected RGBA tint = new RGBA(1,1,1,1);
+        private UIRenderer renderer;
+        
+        public Texture texture() {
+            return texture;
+        }
+        
+        public Builder texture(Texture texture) {
+            this.texture = texture;
+            return this;
+        }
+        
+        public RGBA tint() {
+            return tint;
+        }
+        
+        public Builder tint(RGBA tint) {
+            this.tint = tint;
+            return this;
+        }
+        
+        public UIRenderer renderer() {
+            return renderer;
+        }
+        
+        public Builder renderer(UIRenderer renderer) {
+            this.renderer = renderer;
+            return this;
+        }
+        
+        public Image build() {
+            Image image = new Image(renderer);
+            apply(image);
+            image.tint = tint;
+            image.texture = texture;
+            return image;
+        }
     }
 }

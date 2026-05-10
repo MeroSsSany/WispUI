@@ -53,9 +53,10 @@ public class TabMenu extends UI {
         this.window = window;
         int offset = 16;
         
-        grid = new Grid.Builder(scene)
+        grid = new Grid.Builder()
                 .cellSize(sizeX, sizeY)
                 .rows(1)
+                .renderer(scene.getRenderer())
                 .build()
         ;
         

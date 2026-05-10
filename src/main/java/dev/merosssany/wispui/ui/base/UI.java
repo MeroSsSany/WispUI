@@ -257,6 +257,11 @@ public abstract class UI implements AbstractUI {
         return "";
     }
     
+    @Override
+    public void setTip(String tip) {
+        this.tip = tip;
+    }
+    
     public boolean isDisplayTip() {
         return displayTip;
     }
@@ -404,7 +409,238 @@ public abstract class UI implements AbstractUI {
     }
     
     public abstract void onMouseClicked(MouseButtonEvent event, int relativeX, int relativeY);
+    
     public abstract void onMouseHover(MouseHoverEvent e);
+    
     public abstract void onMouseHoverEnded();
+    
     public abstract void cleanup();
+    
+    public static class Builder implements UIBuilder {
+        protected UIRenderer renderer;
+        protected Window window;
+        protected RGBA backgroundColor = new RGBA();
+        protected RGBA borderColor = new RGBA();
+        protected int width = 0;
+        protected int height = 0;
+        protected float angle = 0;
+        protected int drawOrder = 0; // z
+        protected float cornerRadius = 0;
+        protected float borderThickness = 0;
+        protected boolean hovering = false;
+        protected boolean hidden = false;
+        protected boolean displayTip = true;
+        protected Anchor anchor = new Anchor();
+        protected Pivot pivot = new Pivot(0, 0);
+        protected Vector2i offset = new Vector2i();
+        protected AbstractUI parent;
+        protected Map<String, Component> components = new HashMap<>();
+        protected String tip;
+        protected Mouse.CursorType cursorType = Mouse.CursorType.ARROW;
+        
+        public UIRenderer renderer() {
+            return renderer;
+        }
+        
+        public Builder renderer(UIRenderer renderer) {
+            this.renderer = renderer;
+            return this;
+        }
+        
+        public Window window() {
+            return window;
+        }
+        
+        public Builder window(Window window) {
+            this.window = window;
+            return this;
+        }
+        
+        public RGBA backgroundColor() {
+            return backgroundColor;
+        }
+        
+        public Builder backgroundColor(RGBA backgroundColor) {
+            this.backgroundColor = backgroundColor;
+            return this;
+        }
+        
+        public RGBA borderColor() {
+            return borderColor;
+        }
+        
+        public Builder borderColor(RGBA borderColor) {
+            this.borderColor = borderColor;
+            return this;
+        }
+        
+        public int width() {
+            return width;
+        }
+        
+        public Builder width(int width) {
+            this.width = width;
+            return this;
+        }
+        
+        public int height() {
+            return height;
+        }
+        
+        public Builder height(int height) {
+            this.height = height;
+            return this;
+        }
+        
+        public float angle() {
+            return angle;
+        }
+        
+        public Builder angle(float angle) {
+            this.angle = angle;
+            return this;
+        }
+        
+        public int drawOrder() {
+            return drawOrder;
+        }
+        
+        public Builder drawOrder(int drawOrder) {
+            this.drawOrder = drawOrder;
+            return this;
+        }
+        
+        public float cornerRadius() {
+            return cornerRadius;
+        }
+        
+        public Builder cornerRadius(float cornerRadius) {
+            this.cornerRadius = cornerRadius;
+            return this;
+        }
+        
+        public float borderThickness() {
+            return borderThickness;
+        }
+        
+        public Builder borderThickness(float borderThickness) {
+            this.borderThickness = borderThickness;
+            return this;
+        }
+        
+        public boolean hovering() {
+            return hovering;
+        }
+        
+        public Builder hovering(boolean hovering) {
+            this.hovering = hovering;
+            return this;
+        }
+        
+        public boolean hidden() {
+            return hidden;
+        }
+        
+        public Builder hidden(boolean hidden) {
+            this.hidden = hidden;
+            return this;
+        }
+        
+        public boolean displayTip() {
+            return displayTip;
+        }
+        
+        public Builder displayTip(boolean displayTip) {
+            this.displayTip = displayTip;
+            return this;
+        }
+        
+        public Anchor anchor() {
+            return anchor;
+        }
+        
+        public Builder anchor(Anchor anchor) {
+            this.anchor = anchor;
+            return this;
+        }
+        
+        public Pivot pivot() {
+            return pivot;
+        }
+        
+        public Builder pivot(Pivot pivot) {
+            this.pivot = pivot;
+            return this;
+        }
+        
+        public Vector2i offset() {
+            return offset;
+        }
+        
+        public Builder offset(Vector2i offset) {
+            this.offset = offset;
+            return this;
+        }
+        
+        public AbstractUI parent() {
+            return parent;
+        }
+        
+        public Builder parent(AbstractUI parent) {
+            this.parent = parent;
+            return this;
+        }
+        
+        public Map<String, Component> components() {
+            return components;
+        }
+        
+        public Builder components(Map<String, Component> components) {
+            this.components = components;
+            return this;
+        }
+        
+        public String tip() {
+            return tip;
+        }
+        
+        public Builder tip(String tip) {
+            this.tip = tip;
+            return this;
+        }
+        
+        public Mouse.CursorType cursorType() {
+            return cursorType;
+        }
+        
+        public Builder cursorType(Mouse.CursorType cursorType) {
+            this.cursorType = cursorType;
+            return this;
+        }
+        
+        @Override
+        public <T extends AbstractUI> void apply(T ui) {
+            ui.setBackgroundColor(backgroundColor);
+            ui.setBorderColor(borderColor);
+            ui.setWidth(width);
+            ui.setHeight(height);
+            ui.setAngle(angle);
+            ui.setDrawOrder(drawOrder); // z
+            ui.setCornerRadius(cornerRadius);
+            ui.setBorderThickness(borderThickness);
+            ui.setHidden(hidden);
+            ui.setDisplayTip(displayTip);
+            ui.setAnchor(anchor);
+            ui.setPivot(pivot);
+            ui.setOffset(offset);
+            ui.setParent(parent);
+            ui.setTip(tip);
+            ui.setCursorType(cursorType);
+        }
+        
+        @Override
+        public <U extends AbstractUI> U build() {
+            return null; // cannot build an abstract class
+        }
+    }
 }

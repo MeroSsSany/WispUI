@@ -67,4 +67,22 @@ public abstract class ImageButton extends UI implements ClickableUI {
     public void onMouseClicked(MouseButtonEvent event, int relativeX, int relativeY) {
         click(event, relativeX, relativeY, event.action, event.button);
     }
+    
+    public static class Builder extends UI.Builder {
+        protected TextureRegion texture;
+        
+        public TextureRegion texture() {
+            return texture;
+        }
+        
+        public Builder texture(TextureRegion texture) {
+            this.texture = texture;
+            return this;
+        }
+        
+        public void apply(ImageButton ui) {
+            super.apply(ui);
+            ui.texture = texture;
+        }
+    }
 }

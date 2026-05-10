@@ -6,7 +6,6 @@ import dev.merosssany.wispui.event.input.mouse.MouseButtonEvent;
 import dev.merosssany.wispui.event.input.mouse.MouseHoverEvent;
 import dev.merosssany.wispui.renderer.UIRenderer;
 import dev.merosssany.wispui.ui.base.UI;
-import dev.merosssany.wispui.ui.base.UIBuilder;
 
 /**
  * A UI component used to display a specific sub-region (sprite) from a Texture Atlas.
@@ -97,14 +96,44 @@ public class TextureRegion extends UI implements Component {
         return new TextureRegion(textureIndex, atlas, renderer);
     }
     
-    public static class Builder extends UIBuilder<TextureRegion> {
-        public Builder(UIRenderer renderer, TextureAtlas atlas, int index) {
-            super(new TextureRegion(index, atlas, renderer));
+    public static class Builder extends UI.Builder {
+        protected int textureIndex;
+        protected TextureAtlas atlas;
+        protected RGBA foregroundColor = new RGBA();
+        protected UIRenderer renderer;
+        
+        public int textureIndex() {
+            return textureIndex;
+        }
+        
+        public Builder textureIndex(int textureIndex) {
+            this.textureIndex = textureIndex;
+            return this;
+        }
+        
+        public TextureAtlas atlas() {
+            return atlas;
+        }
+        
+        public Builder atlas(TextureAtlas atlas) {
+            this.atlas = atlas;
+            return this;
+        }
+        
+        public RGBA foregroundColor() {
+            return foregroundColor;
+        }
+        
+        public Builder foregroundColor(RGBA foregroundColor) {
+            this.foregroundColor = foregroundColor;
+            return this;
         }
         
         @Override
-        public UIBuilder<TextureRegion> applyDefault() {
-            return this;
+        public TextureRegion build() {
+            TextureRegion textureRegion = new TextureRegion(textureIndex, atlas, renderer);
+            apply(textureRegion);
+            return textureRegion;
         }
     }
 }

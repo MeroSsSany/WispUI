@@ -4,7 +4,6 @@ import dev.merosssany.wispui.Display;
 import dev.merosssany.wispui.data.RGBA;
 import dev.merosssany.wispui.renderer.FontRenderer;
 import dev.merosssany.wispui.ui.base.AbstractUI;
-import dev.merosssany.wispui.ui.base.UI;
 import dev.merosssany.wispui.ui.base.layout.Anchor;
 import dev.merosssany.wispui.ui.base.layout.Pivot;
 import dev.merosssany.wispui.ui.base.layout.Scene;
@@ -197,5 +196,131 @@ public class Text implements Component {
     
     public Scene getScene() {
         return scene;
+    }
+    
+    public static class Builder {
+        protected Anchor anchor = new Anchor();
+        protected Pivot pivot = new Pivot(0, 0);
+        protected Vector2i offset = new Vector2i();
+        protected AbstractUI parent = null;
+        protected FontRenderer renderer;
+        protected String text = "";
+        protected RGBA color = new RGBA(1, 1, 1, 1);
+        protected boolean centerY = true;
+        protected Scene scene;
+        protected float angle;
+        private int drawOrder;
+        
+        public Anchor anchor() {
+            return anchor;
+        }
+        
+        public Builder anchor(Anchor anchor) {
+            this.anchor = anchor;
+            return this;
+        }
+        
+        public Pivot pivot() {
+            return pivot;
+        }
+        
+        public Builder pivot(Pivot pivot) {
+            this.pivot = pivot;
+            return this;
+        }
+        
+        public Vector2i offset() {
+            return offset;
+        }
+        
+        public Builder offset(Vector2i offset) {
+            this.offset = offset;
+            return this;
+        }
+        
+        public AbstractUI parent() {
+            return parent;
+        }
+        
+        public Builder parent(AbstractUI parent) {
+            this.parent = parent;
+            return this;
+        }
+        
+        public FontRenderer renderer() {
+            return renderer;
+        }
+        
+        public Builder renderer(FontRenderer renderer) {
+            this.renderer = renderer;
+            return this;
+        }
+        
+        public String text() {
+            return text;
+        }
+        
+        public Builder text(String text) {
+            this.text = text;
+            return this;
+        }
+        
+        public RGBA color() {
+            return color;
+        }
+        
+        public Builder color(RGBA color) {
+            this.color = color;
+            return this;
+        }
+        
+        public boolean centerY() {
+            return centerY;
+        }
+        
+        public Builder centerY(boolean centerY) {
+            this.centerY = centerY;
+            return this;
+        }
+        
+        public Scene scene() {
+            return scene;
+        }
+        
+        public Builder scene(Scene scene) {
+            this.scene = scene;
+            return this;
+        }
+        
+        public float angle() {
+            return angle;
+        }
+        
+        public Builder angle(float angle) {
+            this.angle = angle;
+            return this;
+        }
+        
+        public int drawOrder() {
+            return drawOrder;
+        }
+        
+        public Builder drawOrder(int drawOrder) {
+            this.drawOrder = drawOrder;
+            return this;
+        }
+        
+        public Text build() {
+            Text t = new Text(renderer,scene);
+            t.anchor = anchor;
+            t.angle = angle;
+            t.centerY = centerY;
+            t.text = text;
+            t.color = color;
+            t.drawOrder = drawOrder;
+            t.offset = offset;
+            t.pivot = pivot;
+            return t;
+        }
     }
 }

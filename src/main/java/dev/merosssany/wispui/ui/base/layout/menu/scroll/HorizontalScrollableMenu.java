@@ -58,7 +58,7 @@ public class HorizontalScrollableMenu extends UI {
         setupScrollbar();
     }
     
-    public void addUI(AbstractUI ui) {
+    public HorizontalScrollableMenu addUI(AbstractUI ui) {
         uis.add(ui);
         ui.setParent(this);
         
@@ -66,9 +66,10 @@ public class HorizontalScrollableMenu extends UI {
         ui.setDrawOrder(drawOrder + ui.getDrawOrder() + 1);
         
         setupScrollbar();
+        return this;
     }
     
-    public void removeUI(AbstractUI ui) {
+    public HorizontalScrollableMenu removeUI(AbstractUI ui) {
         uis.remove(ui);
         
         contentWidth = 0;
@@ -77,6 +78,7 @@ public class HorizontalScrollableMenu extends UI {
         }
         
         setupScrollbar();
+        return this;
     }
     
     /**

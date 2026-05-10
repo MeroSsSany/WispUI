@@ -5,7 +5,6 @@ import dev.merosssany.wispui.event.input.mouse.MouseHoverEvent;
 import dev.merosssany.wispui.renderer.UIRenderer;
 import dev.merosssany.wispui.ui.base.AbstractUI;
 import dev.merosssany.wispui.ui.base.UI;
-import dev.merosssany.wispui.ui.base.UIBuilder;
 import dev.merosssany.wispui.ui.base.layout.Container;
 import dev.merosssany.wispui.ui.base.layout.Scene;
 import org.joml.Vector2i;
@@ -31,13 +30,14 @@ import java.util.*;
  */
 public class Grid extends UI implements Container {
     protected Map<AbstractUI, Cell> uis = new LinkedHashMap<>();
-    protected List<AbstractUI> temp = Collections.synchronizedList(new ArrayList<>());
     protected int columns;
     protected int rows;
     protected int space;
     protected int padding;
     protected Vector2i cellSize = new Vector2i();
+    
     protected boolean layoutDirty = true;
+    private final List<AbstractUI> temp = Collections.synchronizedList(new ArrayList<>());
     
     public Grid(Scene renderer) {
         this(renderer.getRenderer());
@@ -208,52 +208,85 @@ public class Grid extends UI implements Container {
         uis.remove(ui);
     }
     
+    public void clearCells() {
+        uis.clear();
+    }
+    
     protected record Cell(int x, int y) {
     }
     
-    public static class Builder extends UIBuilder<Grid> {
+    public static class Builder extends UI.Builder {
+        protected Map<AbstractUI, Cell> uis = new LinkedHashMap<>();
+        protected int columns;
+        protected int rows;
+        protected int space;
+        protected int padding;
+        protected Vector2i cellSize = new Vector2i();
         
-        public Builder(Scene scene) {
-            super(new Grid(scene));
+        public int put(AbstractUI ui, int row, int column) {
+            uis.put(ui, new Cell(column, row)); // column = x, row = y
+            return uis.size() - 1;
         }
         
-        public Builder rows(int rows) {
-            ui.rows = rows;
-            return this;
+        public int columns() {
+            return columns;
         }
         
         public Builder columns(int columns) {
-            ui.columns = columns;
+            this.columns = columns;
             return this;
         }
         
-        public Builder cellSize(int size) {
-            ui.cellSize.set(size);
+        public int rows() {
+            return rows;
+        }
+        
+        public Builder rows(int rows) {
+            this.rows = rows;
             return this;
         }
         
-        public Builder margin(int margin) {
-            ui.space = margin;
+        public int space() {
+            return space;
+        }
+        
+        public Builder space(int space) {
+            this.space = space;
             return this;
+        }
+        
+        public int padding() {
+            return padding;
         }
         
         public Builder padding(int padding) {
-            ui.padding = padding;
+            this.padding = padding;
             return this;
         }
         
-        @Override
-        public Builder applyDefault() {
+        public Vector2i cellSize() {
+            return cellSize;
+        }
+        
+        public Builder cellSize(Vector2i cellSize) {
+            this.cellSize.set(cellSize);
             return this;
         }
         
-        public Builder cellSize(int width, int height) {
-            ui.setCellSize(width, height);
+        public void apply(Grid g) {
+            uis.keySet().forEach(ui -> ui.setParent(g));
+            g.columns = columns;
+            g.cellSize = cellSize;
+            g.padding = padding;
+            g.layoutDirty = true;
+            g.rows = rows;
+            g.space = space;
+            g.uis = uis;
+        }
+        
+        public Builder cellSize(int sizeX, int sizeY) {
+            cellSize.set(sizeX, sizeY);
             return this;
         }
-    }
-    
-    public void clearCells() {
-        uis.clear();
     }
 }

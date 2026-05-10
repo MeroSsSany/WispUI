@@ -10,6 +10,7 @@ import dev.merosssany.wispui.event.input.keyboard.KeyPressEvent;
 import dev.merosssany.wispui.event.input.mouse.MouseButtonEvent;
 import dev.merosssany.wispui.manager.Mouse;
 import dev.merosssany.wispui.ui.base.Label;
+import dev.merosssany.wispui.ui.base.UIBuilder;
 import dev.merosssany.wispui.ui.base.layout.Anchor;
 import dev.merosssany.wispui.ui.base.layout.Pivot;
 import dev.merosssany.wispui.ui.base.layout.Scene;
@@ -342,4 +343,25 @@ public abstract class TextInput extends Label {
     public abstract void submit(String data);
     
     public abstract void input(String data);
+    
+    public static class Builder extends Label.Builder {
+        protected String hint;
+        protected boolean disabled;
+        
+        public Builder hint(String hint) {
+            this.hint = hint;
+            return this;
+        }
+        
+        public Builder disabled(boolean disabled) {
+            this.disabled = disabled;
+            return this;
+        }
+        
+        public void apply(TextInput input) {
+            super.apply(input);
+            input.hint = hint;
+            input.disabled = disabled;
+        }
+    }
 }

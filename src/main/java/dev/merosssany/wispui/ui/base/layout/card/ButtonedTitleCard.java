@@ -71,4 +71,38 @@ public class ButtonedTitleCard extends TitledCard {
             }
         }
     }
+    
+    public static class Builder extends TitledCard.Builder {
+        protected List<ClickableUI> buttons;
+        protected float anchorX;
+        
+        private boolean layoutDirty;
+        
+        public List<ClickableUI> buttons() {
+            return buttons;
+        }
+        
+        public Builder buttons(List<ClickableUI> buttons) {
+            this.buttons = buttons;
+            return this;
+        }
+        
+        public float anchorX() {
+            return anchorX;
+        }
+        
+        public Builder anchorX(float anchorX) {
+            this.anchorX = anchorX;
+            return this;
+        }
+        
+        public boolean layoutDirty() {
+            return layoutDirty;
+        }
+        
+        public Builder layoutDirty(boolean layoutDirty) {
+            this.layoutDirty = layoutDirty;
+            return this;
+        }
+    }
 }
